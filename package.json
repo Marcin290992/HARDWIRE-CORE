@@ -12,6 +12,9 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@fontsource/exo-2": "^5.2.8",
+    "@fontsource/ibm-plex-mono": "^5.2.7",
+    "@fontsource/michroma": "^5.2.8",
     "@tailwindcss/vite": "^4.2.2",
     "astro": "^6.0.8",
     "gsap": "^3.14.2",

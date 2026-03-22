@@ -1,6 +1,7 @@
 ---
 import { ClientRouter } from 'astro:transitions';
 import '../styles/global.css';
+import '../styles/hardwire.css';
 
 interface Props {
   title?: string;
@@ -23,12 +24,23 @@ const {
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="description" content={description} />
 		<meta name="generator" content={Astro.generator} />
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
-		<link
-			href="https://fonts.googleapis.com/css2?family=Michroma&family=Exo+2:wght@300;400;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"
-			rel="stylesheet"
-		/>
+		<style is:inline>
+			:root {
+				color-scheme: dark;
+			}
+
+			html,
+			body {
+				min-height: 100%;
+				margin: 0;
+				background: #0f0f0f;
+				color: #f0f0f0;
+			}
+
+			body {
+				font-family: 'Exo 2', system-ui, sans-serif;
+			}
+		</style>
 		<ClientRouter />
 		<title>{title}</title>
 	</head>
