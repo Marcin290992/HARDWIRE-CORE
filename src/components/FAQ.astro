@@ -1,0 +1,456 @@
+---
+const faqs = [
+  {
+    id: 'cost',
+    question: 'How much does a repair cost?',
+    answer:
+      'Every fault is different so I always diagnose first. Most common repairs start from GBP49. You get a clear quote before any work begins with no hidden fees.',
+  },
+  {
+    id: 'no-fix',
+    question: 'Do you offer a no fix, no fee guarantee?',
+    answer:
+      'Yes. If I cannot fix it, you do not pay. The only exception is when you specifically request a paid diagnostic report.',
+  },
+  {
+    id: 'time',
+    question: 'How long do repairs take?',
+    answer:
+      'Most repairs are same day. Complex jobs like data recovery or motherboard work usually take 1 to 3 days. You get a realistic estimate upfront.',
+  },
+  {
+    id: 'dropoff',
+    question: 'Do I need to bring my device to you?',
+    answer:
+      'Yes. I work from my workshop in Staines. This keeps costs lower and your device more secure than a drop-off chain store.',
+  },
+  {
+    id: 'areas',
+    question: 'What areas do you cover?',
+    answer:
+      'Staines, Ashford, Windsor, Heathrow area and surrounding Surrey. If you are not sure whether you are in range, just ask.',
+  },
+  {
+    id: 'data-safety',
+    question: 'Is my data safe?',
+    answer:
+      'I only access what is needed to diagnose and fix the issue. I do not copy, read, or retain your files. Your privacy is non-negotiable.',
+  },
+  {
+    id: 'recovery',
+    question: 'Can you recover data from a dead hard drive?',
+    answer:
+      'Often yes. Success depends on the failure type. I assess first and tell you honestly what is possible before charging anything.',
+  },
+  {
+    id: 'mac-pc',
+    question: 'Do you repair Macs as well as PCs?',
+    answer:
+      'Yes. Macs, Windows laptops and desktops, and custom-built PCs. If it runs, I can fix it.',
+  },
+  {
+    id: 'booking',
+    question: 'How do I book?',
+    answer:
+      'Call, WhatsApp, or use the booking form on this site. I confirm a time and you bring the device.',
+  },
+  {
+    id: 'beyond',
+    question: 'What if my device is beyond repair?',
+    answer:
+      'I will tell you directly. I can also advise replacement options if needed, with zero pressure to buy anything from me.',
+  },
+];
+
+const faqSchema = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((item) => ({
+    '@type': 'Question',
+    name: item.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: item.answer,
+    },
+  })),
+});
+---
+
+<section class="faq" aria-label="Frequently asked questions" id="faq">
+  <div class="faq__topline"></div>
+
+  <div class="faq__inner">
+    <div class="faq__layout">
+      <div class="faq__left faq__reveal">
+        <span class="faq__eyebrow">// Common questions</span>
+        <h2 class="faq__title">
+          Got questions.<br />
+          I have got <em>answers.</em>
+        </h2>
+        <p class="faq__lead">Straight answers to what most people ask before booking. No jargon.</p>
+        <a href="/contact/" class="faq__cta">
+          Still not sure? Get in touch
+          <svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M1 11L11 1M11 1H3M11 1V9" stroke="currentColor" stroke-width="1.5" /></svg>
+        </a>
+      </div>
+
+      <div class="faq__right faq__reveal" id="faqRoot">
+        <div class="faq__list" role="list">
+          {faqs.map((item, idx) => (
+            <div class="faq__entry" role="listitem" data-faq-id={item.id} data-idx={String(idx)}>
+              <button class="faq__item" type="button" aria-expanded="false">
+                <span class="faq__question">{item.question}</span>
+                <span class="faq__icon" aria-hidden="true"></span>
+              </button>
+              <div class="faq__answer-wrap">
+                <p class="faq__answer">{item.answer}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="faq__bottomline"></div>
+  <script type="application/ld+json" set:html={faqSchema}></script>
+</section>
+
+<style>
+.faq {
+  position: relative;
+  background: var(--bg);
+  overflow: hidden;
+}
+
+.faq::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.12) 2px,
+    rgba(0, 0, 0, 0.12) 4px
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+.faq > * {
+  position: relative;
+  z-index: 1;
+}
+
+.faq__topline {
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(220, 38, 38, 0.5), transparent);
+}
+
+.faq__bottomline {
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.08), transparent);
+}
+
+.faq__inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 4.5rem 1.5rem 5rem;
+}
+
+@media (min-width: 768px) {
+  .faq__inner {
+    padding: 5.5rem 2.5rem 6rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .faq__inner {
+    padding: 6rem 3rem 6.5rem;
+  }
+}
+
+.faq__layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@media (min-width: 1024px) {
+  .faq__layout {
+    grid-template-columns: minmax(300px, 420px) 1fr;
+    gap: 3rem;
+  }
+}
+
+.faq__left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.faq__eyebrow {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 1rem;
+}
+
+.faq__title {
+  font-family: var(--font-head);
+  font-size: clamp(1.8rem, 3vw, 2.8rem);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text);
+  line-height: 1.15;
+  margin-bottom: 1rem;
+}
+
+.faq__title em {
+  font-style: normal;
+  color: var(--red);
+}
+
+.faq__lead {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--text-mid);
+  max-width: 36ch;
+  margin-bottom: 1.4rem;
+}
+
+.faq__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  height: 38px;
+  padding: 0 1.2rem;
+  border: 1px solid rgba(220, 38, 38, 0.35);
+  font-family: var(--font-head);
+  font-size: 8.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--red);
+  clip-path: var(--clip-cut);
+  transition: border-color 0.2s var(--ease), background 0.2s var(--ease), color 0.2s var(--ease);
+}
+
+.faq__cta:hover {
+  border-color: var(--red);
+  background: rgba(220, 38, 38, 0.1);
+  color: var(--text);
+}
+
+.faq__cta svg {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+}
+
+.faq__right {
+  border-top: 1px solid var(--border);
+}
+
+.faq__list {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.faq__entry {
+  border-bottom: 1px solid var(--border);
+}
+
+.faq__entry.is-active {
+  background: rgba(220, 38, 38, 0.03);
+}
+
+.faq__item {
+  width: 100%;
+  text-align: left;
+  padding: 1rem 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  color: var(--text);
+  border-left: 3px solid transparent;
+  transition: background 0.22s var(--ease), border-left-color 0.22s var(--ease), padding-left 0.22s var(--ease), color 0.22s var(--ease);
+}
+
+.faq__item:hover {
+  background: rgba(220, 38, 38, 0.03);
+}
+
+.faq__entry.is-active .faq__item {
+  border-left-color: var(--red);
+  padding-left: 1rem;
+  background: rgba(220, 38, 38, 0.05);
+}
+
+.faq__question {
+  font-family: var(--font-head);
+  font-size: 11px;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  line-height: 1.45;
+}
+
+.faq__icon {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.faq__icon::before,
+.faq__icon::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background: var(--red);
+  transform: translate(-50%, -50%);
+  transition: opacity 0.2s var(--ease), transform 0.2s var(--ease);
+}
+
+.faq__icon::before {
+  width: 16px;
+  height: 2px;
+}
+
+.faq__icon::after {
+  width: 2px;
+  height: 16px;
+}
+
+.faq__entry.is-active .faq__icon::after {
+  opacity: 0;
+  transform: translate(-50%, -50%) scaleY(0.2);
+}
+
+.faq__answer {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--text-muted);
+  padding: 0 0.85rem 1rem 1rem;
+}
+
+.faq__answer-wrap {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.3s var(--ease), opacity 0.2s var(--ease);
+}
+
+.faq__entry.is-active .faq__answer-wrap {
+  max-height: var(--faq-open-h, 220px);
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .faq__reveal {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  .faq__reveal.in-view {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.55s cubic-bezier(0.4, 0, 0.2, 1), transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .faq__reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+</style>
+
+<script>
+(() => {
+  const initFAQ = () => {
+    const root = document.getElementById('faqRoot');
+    if (!root) return;
+    if (root.dataset.faqInit === '1') return;
+    root.dataset.faqInit = '1';
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const header = document.querySelector<HTMLElement>('.faq__left');
+    const entries = root.querySelectorAll<HTMLElement>('.faq__entry');
+    const items = root.querySelectorAll<HTMLButtonElement>('.faq__item');
+
+    const syncHeights = () => {
+      entries.forEach((entry) => {
+        const wrap = entry.querySelector<HTMLElement>('.faq__answer-wrap');
+        if (!wrap) return;
+        entry.style.setProperty('--faq-open-h', `${wrap.scrollHeight}px`);
+      });
+    };
+
+    const setActive = (id: string | null) => {
+      entries.forEach((entry) => {
+        const active = entry.dataset.faqId === id;
+        entry.classList.toggle('is-active', active);
+        const button = entry.querySelector<HTMLButtonElement>('.faq__item');
+        if (button) {
+          button.setAttribute('aria-expanded', active ? 'true' : 'false');
+        }
+      });
+
+      syncHeights();
+    };
+
+    setActive(null);
+
+    root.addEventListener('click', (event) => {
+      const target = event.target as HTMLElement;
+      const button = target.closest<HTMLButtonElement>('.faq__item');
+      if (!button) return;
+      const entry = button.closest<HTMLElement>('.faq__entry');
+      if (!entry) return;
+      const id = entry.dataset.faqId ?? null;
+      const isAlreadyActive = entry.classList.contains('is-active');
+      setActive(isAlreadyActive ? null : id);
+    });
+
+    window.addEventListener('resize', syncHeights);
+
+    syncHeights();
+
+    if (!header) return;
+
+    if (reduceMotion) {
+      header.classList.add('in-view');
+      root.classList.add('in-view');
+      return;
+    }
+
+    const observer = new IntersectionObserver((entriesObs) => {
+      entriesObs.forEach((entryObs) => {
+        if (!entryObs.isIntersecting) return;
+        entryObs.target.classList.add('in-view');
+        observer.unobserve(entryObs.target);
+      });
+    }, { threshold: 0.12 });
+
+    observer.observe(header);
+    observer.observe(root);
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initFAQ, { once: true });
+  } else {
+    initFAQ();
+  }
+
+  document.addEventListener('astro:page-load', initFAQ);
+})();
+</script>

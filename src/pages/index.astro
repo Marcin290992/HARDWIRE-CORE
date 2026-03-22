@@ -1,0 +1,23 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SiteMenu from '../components/SiteMenu.astro';
+import HeroSection from '../components/HeroSection.astro';
+import Manifesto from '../components/Manifesto.astro';
+import Services from '../components/Services.astro';
+import FAQ from '../components/FAQ.astro';
+import '../styles/hardwire.css';
+---
+
+<Layout
+	title="Hardwire Core - Professional Computer Repairs | Stanwell TW19"
+	description="Professional computer repair services in Stanwell TW19. Expert laptop and desktop repairs, virus removal, data recovery."
+>
+	<SiteMenu />
+	<main>
+		<HeroSection />
+		<Manifesto />
+		<Services />
+		<FAQ />
+	</main>
+	<script src="/scripts/menu.js" defer></script>
+</Layout>
