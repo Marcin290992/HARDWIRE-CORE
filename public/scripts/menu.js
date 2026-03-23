@@ -4,6 +4,8 @@ document.addEventListener('DOMContentLoaded', function () {
   const navbarMenu = document.getElementById('navbarMenu');
   const menuToggle = document.getElementById('menuToggle');
   let menuOverlay = null;
+  let closeTimer = null;
+  let lockedScrollY = 0;
 
   if (!header || !navbarMenu || !menuToggle) return;
 
@@ -23,19 +25,54 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function openMenu() {
+    if (closeTimer) {
+      clearTimeout(closeTimer);
+      closeTimer = null;
+    }
+
+    navbarMenu.classList.remove('is-closing');
     navbarMenu.classList.add('active');
     if (menuOverlay) menuOverlay.classList.add('active');
-    document.body.style.overflow = 'hidden';
+
+    lockedScrollY = window.scrollY;
+    document.body.classList.add('menu-open');
+    document.body.style.position = 'fixed';
+    document.body.style.top = `-${lockedScrollY}px`;
+    document.body.style.left = '0';
+    document.body.style.right = '0';
+    document.body.style.width = '100%';
+
+    header.classList.add('menu-open');
     menuToggle.setAttribute('aria-expanded', 'true');
   }
 
   function closeMenuAnimated() {
+    if (closeTimer) {
+      clearTimeout(closeTimer);
+      closeTimer = null;
+    }
+
+    navbarMenu.classList.add('is-closing');
     navbarMenu.classList.remove('active');
-    if (menuOverlay) menuOverlay.classList.remove('active');
-    document.body.style.overflow = '';
     if (menuCheckbox) menuCheckbox.checked = false;
     menuToggle.setAttribute('aria-expanded', 'false');
     closeAllDropdowns();
+
+    closeTimer = setTimeout(() => {
+      navbarMenu.classList.remove('is-closing');
+      if (menuOverlay) menuOverlay.classList.remove('active');
+      document.body.classList.remove('menu-open');
+      header.classList.remove('menu-open');
+
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.left = '';
+      document.body.style.right = '';
+      document.body.style.width = '';
+      window.scrollTo(0, lockedScrollY);
+
+      closeTimer = null;
+    }, 420);
   }
 
   function forceCloseInstant() {
@@ -54,7 +91,20 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     if (menuCheckbox) menuCheckbox.checked = false;
-    document.body.style.overflow = '';
+    navbarMenu.classList.remove('is-closing');
+    document.body.classList.remove('menu-open');
+    header.classList.remove('menu-open');
+
+    if (closeTimer) {
+      clearTimeout(closeTimer);
+      closeTimer = null;
+    }
+
+    document.body.style.position = '';
+    document.body.style.top = '';
+    document.body.style.left = '';
+    document.body.style.right = '';
+    document.body.style.width = '';
     closeAllDropdowns();
   }
 

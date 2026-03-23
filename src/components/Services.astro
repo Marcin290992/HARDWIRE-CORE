@@ -1,4 +1,6 @@
 ---
+const bookingBase = 'https://wa.me/447575701219?text=';
+
 const services = [
   {
     id: "laptop-repairs",
@@ -7,7 +9,7 @@ const services = [
     title: "Laptop Repairs",
     desc: "Screen replacements, keyboard fixes, charging ports, motherboard diagnosis — handled same day whenever possible.",
     time: "Same day",
-    href: "/laptop-repairs/",
+    href: `${bookingBase}${encodeURIComponent("Hi, I'd like to book Laptop Repairs.")}`,
     tag: "Most popular",
   },
   {
@@ -16,7 +18,7 @@ const services = [
     title: "Desktop PC Repairs",
     desc: "Power supply failures, GPU issues, no POST diagnostics. I fix what others give up on.",
     time: "1–2 days",
-    href: "/desktop-repairs/",
+    href: `${bookingBase}${encodeURIComponent("Hi, I'd like to book Desktop PC Repairs.")}`,
   },
   {
     id: "virus-removal",
@@ -24,7 +26,7 @@ const services = [
     title: "Virus & Malware Removal",
     desc: "Deep scan, full clean, browser reset. Your machine back to safe and fast.",
     time: "Same day",
-    href: "/removal-virus/",
+    href: `${bookingBase}${encodeURIComponent("Hi, I'd like to book Virus & Malware Removal.")}`,
   },
   {
     id: "data-recovery",
@@ -32,7 +34,7 @@ const services = [
     title: "Data Recovery",
     desc: "Failed drives, accidental deletes, corrupted partitions. Photos, documents — recovered.",
     time: "2–3 days",
-    href: "/recovery-data/",
+    href: `${bookingBase}${encodeURIComponent("Hi, I'd like to book Data Recovery.")}`,
   },
   {
     id: "screen-replacement",
@@ -40,7 +42,7 @@ const services = [
     title: "Screen Replacement",
     desc: "Cracked or dead display? Genuine quality panels fitted fast, laptop or desktop.",
     time: "Same day",
-    href: "/screen-replacement/",
+    href: `${bookingBase}${encodeURIComponent("Hi, I'd like to book Screen Replacement.")}`,
   },
   {
     id: "os-installation",
@@ -48,7 +50,7 @@ const services = [
     title: "OS Installation",
     desc: "Fresh Windows or Linux install, drivers, updates. Clean slate, nothing missing.",
     time: "Same day",
-    href: "/system-installation/",
+    href: `${bookingBase}${encodeURIComponent("Hi, I'd like to book OS Installation.")}`,
   },
   {
     id: "speed-boost",
@@ -56,7 +58,7 @@ const services = [
     title: "Speed Enhancement",
     desc: "Startup optimisation, bloatware removal, thermal repaste. Feels like new hardware.",
     time: "Same day",
-    href: "/speed-enhancement/",
+    href: `${bookingBase}${encodeURIComponent("Hi, I'd like to book Speed Enhancement.")}`,
   },
   {
     id: "hardware-upgrades",
@@ -64,7 +66,7 @@ const services = [
     title: "Hardware Upgrades",
     desc: "RAM, SSD, GPU. I spec the right parts and fit them correctly — no guesswork.",
     time: "Same day",
-    href: "/component-upgrades/",
+    href: `${bookingBase}${encodeURIComponent("Hi, I'd like to book Hardware Upgrades.")}`,
   },
   {
     id: "deep-cleaning",
@@ -72,7 +74,7 @@ const services = [
     title: "Deep Cleaning",
     desc: "Dust removal, fan clean, thermal compound replacement. Stops overheating for good.",
     time: "Same day",
-    href: "/computer-cleaning/",
+    href: `${bookingBase}${encodeURIComponent("Hi, I'd like to book Deep Cleaning.")}`,
   },
   {
     id: "network-setup",
@@ -80,7 +82,7 @@ const services = [
     title: "Network Setup",
     desc: "Router config, Wi-Fi extenders, wired runs. Strong signal everywhere in your home.",
     time: "Same day",
-    href: "/setup-router/",
+    href: `${bookingBase}${encodeURIComponent("Hi, I'd like to book Network Setup.")}`,
   },
   {
     id: "software-troubleshooting",
@@ -88,7 +90,7 @@ const services = [
     title: "Software Troubleshooting",
     desc: "Crashes, freezes, error loops. I diagnose and fix what's broken — or explain why.",
     time: "Same day",
-    href: "/software-troubleshooting/",
+    href: `${bookingBase}${encodeURIComponent("Hi, I'd like to book Software Troubleshooting.")}`,
   },
   {
     id: "health-check",
@@ -96,7 +98,7 @@ const services = [
     title: "PC Health Check",
     desc: "Full diagnostic of hardware and software. Know exactly what's wrong — and what isn't.",
     time: "1–2 hrs",
-    href: "/health-check/",
+    href: `${bookingBase}${encodeURIComponent("Hi, I'd like to book a PC Health Check.")}`,
     tag: "Free assessment",
   },
 ];
@@ -104,7 +106,7 @@ const services = [
 const orderedServices = services;
 ---
 
-<section class="services" aria-label="Services">
+<section class="services" aria-label="Services" id="services">
 
   <div class="services__top-line"></div>
 
@@ -200,7 +202,7 @@ const orderedServices = services;
                 {s.tag && <span class="services__panel-tag">{s.tag}</span>}
               </div>
 
-              <a href={s.href} class="services__cta" transition:name={`service-${s.id}`}>
+              <a href={s.href} class="services__cta" target="_blank" rel="noreferrer">
                 <span>Book service</span>
                 <svg viewBox="0 0 12 12" fill="none"><path d="M1 11L11 1M11 1H3M11 1V9" stroke="white" stroke-width="1.5"/></svg>
                 <span class="services__cta-shine" aria-hidden="true"></span>
@@ -1044,9 +1046,16 @@ const orderedServices = services;
   const meter = document.getElementById('services-meter-fill');
   const stage = document.getElementById('svc-stage');
   const activeTitle = document.getElementById('services-active-title');
+  const serviceSection = document.getElementById('services');
   let pulseTimer: ReturnType<typeof window.setTimeout> | undefined;
 
-  const activate = (serviceId: string) => {
+  const serviceIds = new Set(
+    Array.from(navItems)
+      .map((item) => item.dataset.serviceId)
+      .filter((value): value is string => Boolean(value))
+  );
+
+  const activate = (serviceId: string, updateHash = false) => {
     const total = navItems.length;
     navItems.forEach((item, idx) => {
       const active = item.dataset.serviceId === serviceId;
@@ -1073,6 +1082,26 @@ const orderedServices = services;
       stage.classList.add('is-pulsing');
       pulseTimer = window.setTimeout(() => stage.classList.remove('is-pulsing'), 450);
     }
+
+    if (updateHash) {
+      const url = new URL(window.location.href);
+      url.hash = serviceId;
+      window.history.replaceState({}, '', url);
+    }
+  };
+
+  const syncFromHash = () => {
+    const hash = window.location.hash.replace(/^#/, '');
+    if (!hash) return;
+
+    if (serviceIds.has(hash)) {
+      activate(hash);
+      if (serviceSection) {
+        window.requestAnimationFrame(() => {
+          serviceSection.scrollIntoView({ behavior: 'auto', block: 'start' });
+        });
+      }
+    }
   };
 
   navItems.forEach((item) => {
@@ -1080,7 +1109,7 @@ const orderedServices = services;
       const id = item.dataset.serviceId;
       if (!id) return;
 
-      activate(id);
+      activate(id, true);
 
       if (window.matchMedia('(max-width: 1023px)').matches && stage) {
         window.requestAnimationFrame(() => {
@@ -1092,6 +1121,8 @@ const orderedServices = services;
 
   const first = navItems[0]?.dataset.serviceId;
   if (first) activate(first);
+  syncFromHash();
+  window.addEventListener('hashchange', syncFromHash);
 
   const revealItems = document.querySelectorAll<HTMLElement>('.services__nav, .services__stage, .services__meter, .services__bottom');
   if (!revealItems.length) return;

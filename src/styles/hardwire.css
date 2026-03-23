@@ -220,6 +220,7 @@ input:focus-visible {
   align-items: center;
   gap: 12px;
   flex-shrink: 0;
+  transition: opacity 0.28s var(--ease), filter 0.28s var(--ease), transform 0.28s var(--ease);
 }
 
 .logo__hex {
@@ -239,7 +240,7 @@ input:focus-visible {
   height: 100%;
   background: var(--red);
   clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-  transition: background 0.25s var(--ease);
+  transition: background 0.25s var(--ease), opacity 0.25s var(--ease);
 }
 
 .logo__hex-inner {
@@ -284,6 +285,7 @@ input:focus-visible {
   letter-spacing: 0.26em;
   text-transform: uppercase;
   color: rgba(220, 38, 38, 0.6);
+  transition: color 0.25s var(--ease), opacity 0.25s var(--ease);
 }
 
 .header__actions {
@@ -793,19 +795,39 @@ input:focus-visible {
 }
 
 .menu-overlay {
-  display: none;
+  display: block;
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.38);
   z-index: 999;
   opacity: 0;
-  transition: opacity 0.35s var(--ease);
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.35s var(--ease), visibility 0.35s var(--ease);
   backdrop-filter: blur(4px);
 }
 
 .menu-overlay.active {
-  display: block;
   opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+body.menu-open .topbar,
+body.menu-open main {
+  filter: blur(2px) saturate(0.86);
+  opacity: 0.72;
+  transition: filter 0.35s var(--ease), opacity 0.35s var(--ease);
+}
+
+body.menu-open {
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+
+.topbar,
+main {
+  transition: filter 0.35s var(--ease), opacity 0.35s var(--ease);
 }
 
 .hw-hero {
@@ -1364,6 +1386,24 @@ input:focus-visible {
 }
 
 @media (max-width: 992px) {
+  .header.menu-open .logo {
+    opacity: 0.38;
+    filter: blur(0.7px) saturate(0.65);
+    transform: translateY(-1px);
+  }
+
+  .header.menu-open .logo__hex-outer {
+    opacity: 0.55;
+  }
+
+  .header.menu-open .logo__sub {
+    color: rgba(240, 240, 240, 0.35);
+  }
+
+  .topbar__right {
+    display: none;
+  }
+
   .hw-hero__inner {
     flex-direction: column;
     gap: 0;
@@ -1389,10 +1429,30 @@ input:focus-visible {
 
   .menu-toggle-container {
     display: block;
+    right: 0.65rem;
+    width: 52px;
+    height: 50px;
   }
 
   .menu-toggle {
     display: flex;
+    width: 52px;
+    height: 50px;
+    background: rgba(8, 8, 8, 0.92);
+    border: 1px solid var(--red-border);
+    clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+    transition: border-color 0.2s var(--ease), background 0.2s var(--ease);
+  }
+
+  .menu-toggle svg {
+    width: 52px;
+    height: 50px;
+  }
+
+  .header.menu-open .menu-toggle {
+    background: rgba(15, 15, 15, 0.97);
+    border-color: rgba(220, 38, 38, 0.55);
+    --color: var(--red);
   }
 
   .header__actions {
@@ -1414,11 +1474,36 @@ input:focus-visible {
     overflow-x: hidden;
     padding: 0;
     transform: translateX(100%);
-    transition: transform 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+    opacity: 1;
+    visibility: hidden;
+    transition: transform 0.5s cubic-bezier(0.645, 0.045, 0.355, 1), visibility 0s linear 0.5s;
   }
 
   .navbar__menu.active {
     transform: translateX(0);
+    visibility: visible;
+    transition: transform 0.5s cubic-bezier(0.645, 0.045, 0.355, 1), visibility 0s;
+  }
+
+  .navbar__menu.is-closing {
+    transform: translateX(100%);
+    visibility: visible;
+  }
+
+  .navbar__menu > * {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.25s var(--ease), transform 0.25s var(--ease);
+  }
+
+  .navbar__menu.active > * {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .navbar__menu.is-closing > * {
+    opacity: 1;
+    transform: translateY(0);
   }
 
   .mobile-header {
@@ -1426,7 +1511,7 @@ input:focus-visible {
     flex-direction: column;
     align-items: center;
     gap: 12px;
-    padding: 24px 20px 20px;
+    padding: 78px 20px 20px;
     border-bottom: 1px solid var(--red-border);
     background: var(--bg2);
   }
@@ -1613,38 +1698,43 @@ input:focus-visible {
 
   .mobile-socials {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
-    padding: 20px;
+    align-items: stretch;
+    justify-content: stretch;
+    gap: 10px;
+    padding: 16px 16px 20px;
     border-top: 1px solid var(--border);
     margin-top: auto;
+    background: linear-gradient(180deg, rgba(220, 38, 38, 0.03) 0%, rgba(220, 38, 38, 0.08) 100%);
   }
 
   .mobile-socials__icon {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 44px;
-    height: 44px;
-    border: 1px solid var(--red-border);
-    background: rgba(220, 38, 38, 0.06);
+    flex: 1;
+    min-width: 0;
+    height: 46px;
+    border: 1px solid rgba(220, 38, 38, 0.35);
+    background: rgba(8, 8, 8, 0.88);
     transition: background 0.2s var(--ease), border-color 0.2s var(--ease);
-    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    clip-path: polygon(0 0, calc(100% - 9px) 0, 100% 9px, 100% 100%, 9px 100%, 0 calc(100% - 9px));
   }
 
   .mobile-socials__icon svg {
-    stroke: var(--text-muted);
-    transition: stroke 0.2s var(--ease);
+    width: 18px;
+    height: 18px;
+    stroke: rgba(240, 240, 240, 0.88);
+    transition: stroke 0.2s var(--ease), transform 0.2s var(--ease);
   }
 
   .mobile-socials__icon:hover {
-    background: rgba(220, 38, 38, 0.2);
+    background: rgba(220, 38, 38, 0.14);
     border-color: var(--red);
   }
 
   .mobile-socials__icon:hover svg {
     stroke: var(--red);
+    transform: translateY(-1px);
   }
 
   .topbar__social span {
