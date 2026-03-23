@@ -1,0 +1,332 @@
+---
+const bookingUrl = 'https://wa.me/447575701219?text=Hi%2C%20I%27d%20like%20to%20book%20a%20repair.';
+const whatsappUrl = 'https://wa.me/447575701219';
+---
+
+<section class="prlx" aria-label="Parallax call to action section">
+  <div class="prlx__line prlx__line--top" aria-hidden="true"></div>
+
+  <div class="prlx__layers" aria-hidden="true">
+    <div class="prlx__layer prlx__layer--grid" data-speed="-0.15"></div>
+
+    <div class="prlx__layer prlx__layer--lines" data-speed="-0.3">
+      <span class="prlx__hline" style="top: 15%;"></span>
+      <span class="prlx__hline" style="top: 30%;"></span>
+      <span class="prlx__hline" style="top: 50%;"></span>
+      <span class="prlx__hline" style="top: 65%;"></span>
+      <span class="prlx__hline" style="top: 80%;"></span>
+    </div>
+
+    <div class="prlx__layer prlx__layer--hexes" data-speed="-0.5">
+      <span class="prlx__hex prlx__hex--lg"></span>
+      <span class="prlx__hex prlx__hex--md"></span>
+      <span class="prlx__hex prlx__hex--sm"></span>
+    </div>
+
+    <div class="prlx__layer prlx__layer--scan" data-speed="-0.8"></div>
+  </div>
+
+  <div class="prlx__content">
+    <span class="prlx__eyebrow">// Stanwell TW19 · Surrey</span>
+
+    <h2 class="prlx__title">
+      Every device<br />
+      deserves a <em>second chance.</em>
+    </h2>
+
+    <p class="prlx__sub">Repairs done properly. Clear pricing. No fix, no fee.</p>
+
+    <div class="prlx__actions">
+      <a href={bookingUrl} class="prlx__btn prlx__btn--primary">
+        <span>Book a Repair</span>
+        <span class="prlx__btn-shine" aria-hidden="true"></span>
+      </a>
+
+      <a href={whatsappUrl} class="prlx__btn prlx__btn--secondary">
+        <span>WhatsApp Me</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="prlx__line prlx__line--bottom" aria-hidden="true"></div>
+</section>
+
+<style>
+.prlx {
+  position: relative;
+  overflow: hidden;
+  height: 80vh;
+  min-height: 520px;
+  background: var(--bg);
+}
+
+.prlx__line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  z-index: 20;
+}
+
+.prlx__line--top {
+  top: 0;
+  background: linear-gradient(to right, transparent, rgba(220, 38, 38, 0.5), transparent);
+}
+
+.prlx__line--bottom {
+  bottom: 0;
+  background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.08), transparent);
+}
+
+.prlx__layers,
+.prlx__layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.prlx__layer {
+  will-change: transform;
+}
+
+.prlx__layer--grid {
+  background-image: radial-gradient(circle, rgba(220, 38, 38, 0.18) 1px, transparent 1px);
+  background-size: 32px 32px;
+  opacity: 0.22;
+}
+
+.prlx__layer--lines {
+  opacity: 1;
+}
+
+.prlx__hline {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+}
+
+.prlx__layer--hexes {
+  opacity: 1;
+}
+
+.prlx__hex {
+  position: absolute;
+  border: 1px solid rgba(220, 38, 38, 0.12);
+  background: transparent;
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+}
+
+.prlx__hex--lg {
+  width: 260px;
+  height: 260px;
+  right: -120px;
+  top: 42%;
+  transform: translateY(-50%);
+}
+
+.prlx__hex--md {
+  width: 180px;
+  height: 180px;
+  right: 16%;
+  top: 54%;
+  transform: translateY(-50%);
+}
+
+.prlx__hex--sm {
+  width: 120px;
+  height: 120px;
+  left: -44px;
+  top: 10%;
+}
+
+.prlx__layer--scan {
+  opacity: 0.6;
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.1) 2px,
+    rgba(0, 0, 0, 0.1) 4px
+  );
+}
+
+.prlx__content {
+  position: relative;
+  z-index: 10;
+  height: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.prlx__eyebrow {
+  margin-bottom: 1.5rem;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--red);
+}
+
+.prlx__title {
+  margin-bottom: 1.5rem;
+  font-family: var(--font-head);
+  font-size: clamp(2.2rem, 5vw, 4.5rem);
+  letter-spacing: 0.04em;
+  line-height: 1.1;
+  text-transform: uppercase;
+  color: var(--text);
+}
+
+.prlx__title em {
+  font-style: normal;
+  color: var(--red);
+}
+
+.prlx__sub {
+  margin: 0 auto 2.5rem;
+  max-width: 480px;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+
+.prlx__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+  width: 100%;
+}
+
+.prlx__btn {
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 52px;
+  padding: 0 2.2rem;
+  font-family: var(--font-head);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #fff;
+  clip-path: var(--clip-cut);
+  transition: background 0.2s var(--ease), border-color 0.2s var(--ease), color 0.2s var(--ease);
+}
+
+.prlx__btn--primary {
+  background: var(--red);
+}
+
+.prlx__btn--primary:hover {
+  background: var(--red-dark);
+}
+
+.prlx__btn-shine {
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.15), transparent);
+  transition: transform 0.5s ease;
+}
+
+.prlx__btn--primary:hover .prlx__btn-shine {
+  transform: translateX(100%);
+}
+
+.prlx__btn--secondary {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--text);
+}
+
+.prlx__btn--secondary:hover {
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+@media (max-width: 768px) {
+  .prlx {
+    height: auto;
+    min-height: 480px;
+  }
+
+  .prlx__content {
+    padding: 4rem 1.5rem;
+  }
+
+  .prlx__title {
+    font-size: clamp(1.8rem, 8vw, 2.8rem);
+  }
+
+  .prlx__actions {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .prlx__btn {
+    width: 100%;
+  }
+
+  .prlx__hex--lg {
+    width: 210px;
+    height: 210px;
+    right: -105px;
+  }
+
+  .prlx__hex--md {
+    width: 140px;
+    height: 140px;
+    right: 6%;
+  }
+}
+</style>
+
+<script>
+  import gsap from 'gsap';
+  import ScrollTrigger from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const initParallaxBanner = () => {
+    const section = document.querySelector('.prlx');
+    if (!section) return;
+    if (section.dataset.prlxInit === '1') return;
+    section.dataset.prlxInit = '1';
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const layers = section.querySelectorAll('[data-speed]');
+
+    layers.forEach((layer) => {
+      const speed = parseFloat(layer.getAttribute('data-speed') || '0');
+      gsap.to(layer, {
+        yPercent: speed * 100,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: section,
+          start: 'top bottom',
+          end: 'bottom top',
+          scrub: true
+        }
+      });
+    });
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initParallaxBanner, { once: true });
+  } else {
+    initParallaxBanner();
+  }
+
+  document.addEventListener('astro:page-load', initParallaxBanner);
+</script>

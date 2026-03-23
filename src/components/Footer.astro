@@ -1,0 +1,380 @@
+---
+const phoneHref = 'tel:+447575701219';
+const phoneLabel = '+44 7575 701 219';
+const whatsappHref = 'https://wa.me/447575701219';
+---
+
+<footer class="footer" aria-label="Site footer">
+  <div class="footer__topline" aria-hidden="true"></div>
+  <div class="footer__scan" aria-hidden="true"></div>
+
+  <div class="footer__inner">
+    <div class="footer__row">
+      <div class="footer__col footer__col--brand">
+        <a href="/" class="footer-logo logo" aria-label="Hardwire Core home">
+          <div class="logo__hex" aria-hidden="true">
+            <div class="logo__hex-outer"></div>
+            <div class="logo__hex-inner"></div>
+          </div>
+
+          <div class="logo__text">
+            <span class="logo__name">Hardwire <em>Core</em></span>
+            <span class="logo__sub">// Computer Service · TW19</span>
+          </div>
+        </a>
+
+        <p class="footer__tagline">Repairs done properly.</p>
+      </div>
+
+      <nav class="footer__col footer__col--nav" aria-label="Footer navigation">
+        <div class="footer__label">// Navigate</div>
+        <div class="footer__links">
+          <a href="/">Home</a>
+          <a href="/#services">Services</a>
+          <a href="/#mfest">About</a>
+          <a href="/#faq">FAQ</a>
+          <a href={whatsappHref}>Contact</a>
+        </div>
+      </nav>
+
+      <div class="footer__col footer__col--contact">
+        <div class="footer__label">// Get in touch</div>
+
+        <div class="footer__contact-item">
+          <span class="footer__contact-label">Phone</span>
+          <a class="footer__contact-line footer__contact-line--mono" href={phoneHref}>{phoneLabel}</a>
+        </div>
+
+        <div class="footer__contact-item">
+          <span class="footer__contact-label">WhatsApp</span>
+          <a class="footer__contact-wa" href={whatsappHref} aria-label="WhatsApp">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
+            </svg>
+          </a>
+        </div>
+
+        <p class="footer__meta">Stanwell TW19, Surrey, UK</p>
+        <p class="footer__hours">Mon-Fri 09:00-18:00 · Sat 09:00-16:00</p>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <p class="footer__copy">© 2025 Hardwire Core. All rights reserved.</p>
+
+      <div class="footer__socials" aria-label="Social media links">
+        <a href="https://www.instagram.com/hardwirecore" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="2" y="2" width="20" height="20" rx="5" />
+            <circle cx="12" cy="12" r="4" />
+            <circle cx="17.4" cy="6.6" r="1" />
+          </svg>
+        </a>
+
+        <a href="https://www.facebook.com/hardwirecore" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+          </svg>
+        </a>
+
+        <a href={whatsappHref} aria-label="WhatsApp">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    position: relative;
+    background: var(--bg);
+    overflow: hidden;
+  }
+
+  .footer__topline {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(220, 38, 38, 0.5), transparent);
+    z-index: 3;
+  }
+
+  .footer__scan {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 0, 0, 0.12) 2px,
+      rgba(0, 0, 0, 0.12) 4px
+    );
+    opacity: 0.8;
+    z-index: 0;
+  }
+
+  .footer__inner {
+    position: relative;
+    z-index: 1;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2.5rem 2.5rem 2rem;
+  }
+
+  .footer__row {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr 1fr;
+    gap: 2rem;
+    align-items: start;
+  }
+
+  .footer-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .logo__hex {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+  }
+
+  .logo__hex-outer,
+  .logo__hex-inner {
+    position: absolute;
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  }
+
+  .logo__hex-outer {
+    inset: 0;
+    background: var(--red);
+    transition: background 0.25s var(--ease);
+  }
+
+  .logo__hex-inner {
+    top: 50%;
+    left: 50%;
+    width: 46%;
+    height: 46%;
+    transform: translate(-50%, -50%);
+    background: var(--bg2);
+  }
+
+  .footer-logo:hover .logo__hex-outer {
+    background: var(--red-dark);
+  }
+
+  .logo__text {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .logo__name {
+    font-family: var(--font-head);
+    font-size: 15px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text);
+    line-height: 1;
+  }
+
+  .logo__name em {
+    font-style: normal;
+    color: var(--red);
+  }
+
+  .logo__sub {
+    font-family: var(--font-mono);
+    font-size: 8px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: rgba(220, 38, 38, 0.6);
+  }
+
+  .footer__tagline {
+    margin-top: 0.85rem;
+    max-width: 200px;
+    font-family: var(--font-body);
+    font-size: 12px;
+    line-height: 1.5;
+    color: var(--text-muted);
+  }
+
+  .footer__label {
+    margin-bottom: 0.75rem;
+    font-family: var(--font-mono);
+    font-size: 8px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: rgba(220, 38, 38, 0.6);
+  }
+
+  .footer__links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+
+  .footer__links a {
+    font-family: var(--font-body);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s var(--ease);
+  }
+
+  .footer__links a:hover {
+    color: var(--red);
+  }
+
+  .footer__contact-item {
+    margin-bottom: 0.65rem;
+  }
+
+  .footer__contact-label {
+    display: block;
+    margin-bottom: 0.25rem;
+    font-family: var(--font-mono);
+    font-size: 8px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-mid);
+  }
+
+  .footer__contact-line {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text);
+    text-decoration: none;
+    transition: color 0.2s var(--ease);
+  }
+
+  .footer__contact-line--mono {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.05em;
+  }
+
+  .footer__contact-line svg {
+    width: 12px;
+    height: 12px;
+    flex: 0 0 auto;
+  }
+
+  .footer__contact-line:hover {
+    color: var(--red);
+  }
+
+  .footer__contact-wa {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    color: var(--text);
+    text-decoration: none;
+    transition: color 0.2s var(--ease);
+  }
+
+  .footer__contact-wa:hover {
+    color: var(--red);
+  }
+
+  .footer__contact-wa svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .footer__meta {
+    margin-top: 0.45rem;
+    font-family: var(--font-body);
+    font-size: 11px;
+    line-height: 1.6;
+    color: var(--text-muted);
+  }
+
+  .footer__hours {
+    margin-top: 0.4rem;
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+  }
+
+  .footer__bottom {
+    margin-top: 2rem;
+    padding: 1rem 0 0;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .footer__copy {
+    font-family: var(--font-mono);
+    font-size: 8px;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+  }
+
+  .footer__socials {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .footer__socials a {
+    display: inline-flex;
+    color: var(--text-muted);
+    transition: color 0.2s var(--ease);
+  }
+
+  .footer__socials a:hover {
+    color: var(--red);
+  }
+
+  .footer__socials svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  @media (max-width: 768px) {
+    .footer__inner {
+      padding: 2.2rem 1.5rem 1.8rem;
+    }
+
+    .footer__row {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .footer__links {
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 0.5rem 1.5rem;
+    }
+
+    .footer__bottom {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.75rem;
+    }
+  }
+</style>
