@@ -190,7 +190,8 @@
       if (parentItem && parentItem.classList.contains('has-dropdown')) return;
 
       const href = link.getAttribute('href');
-      if (!href || href === '#' || href === '') return;
+      if (!href || href === '#' || href === '' || href.indexOf('javascript:') === 0) return;
+      if (link.hasAttribute('data-contact-modal')) return;
 
       if (!navbarMenu.classList.contains('active')) return;
 

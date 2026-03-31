@@ -3,6 +3,7 @@ import '../styles/global.css';
 import '../styles/hardwire.css';
 import { ClientRouter } from 'astro:transitions';
 import WhatsAppWidget from '../components/WhatsAppWidget.astro';
+import ContactModal from '../components/ContactModal.astro';
 
 interface Props {
   title?: string;
@@ -131,6 +132,10 @@ const isHomePage = Astro.url.pathname === '/';
     <div id="atmo-grain" aria-hidden="true" transition:persist></div>
 
     <slot />
+
+    <div transition:persist="contact-modal">
+      <ContactModal />
+    </div>
 
     <script src="/scripts/menu.js" defer></script>
 
