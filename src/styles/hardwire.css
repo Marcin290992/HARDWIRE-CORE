@@ -1409,6 +1409,7 @@ body.menu-open #wa-widget {
     width: 100%;
     border-bottom: 1px solid var(--border);
     position: relative;
+    display: flex;
   }
 
   .navbar__item--cta {
@@ -1416,10 +1417,13 @@ body.menu-open #wa-widget {
   }
 
   .navbar__link {
+    display: flex;
     width: 100%;
     height: auto;
+    flex: 1;
     flex-direction: row;
     justify-content: flex-start;
+    align-items: center;
     padding: 18px 24px;
     gap: 16px;
     font-size: 14px;
