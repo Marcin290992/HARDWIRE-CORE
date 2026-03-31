@@ -379,6 +379,7 @@ input:focus-visible {
 
 .navbar__item {
   position: relative;
+  flex: 1 1 0;
 }
 
 .navbar__link {
@@ -452,8 +453,7 @@ input:focus-visible {
   background: var(--red);
   border-left: none;
   border-right: none;
-  margin-left: 8px;
-  padding: 0 1.4rem;
+  padding: 0 1.1rem;
   clip-path: var(--clip-cut);
   font-weight: 400;
   overflow: hidden;
