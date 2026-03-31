@@ -34,20 +34,17 @@ const isHomePage = Astro.url.pathname === '/';
     <meta name="generator" content={Astro.generator} />
 
     <style is:inline>
-      /* ── Fonts (inlined — survive ClientRouter swaps) ──────── */
       @font-face { font-family: 'Michroma'; src: url('/fonts/michroma-400.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
       @font-face { font-family: 'Exo 2';   src: url('/fonts/exo2-300.woff2')    format('woff2'); font-weight: 300; font-style: normal; font-display: swap; }
       @font-face { font-family: 'Exo 2';   src: url('/fonts/exo2-400.woff2')    format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
       @font-face { font-family: 'Exo 2';   src: url('/fonts/exo2-600.woff2')    format('woff2'); font-weight: 600; font-style: normal; font-display: swap; }
       @font-face { font-family: 'Exo 2';   src: url('/fonts/exo2-700.woff2')    format('woff2'); font-weight: 700; font-style: normal; font-display: swap; }
 
-      /* ── Base ───────────────────────────────────────────────── */
-      :root { color-scheme: dark; --topbar-h: 36px; --nav-h: 72px; }
+      :root { color-scheme: dark; --topbar-h: 36px; --nav-h: 72px; --header-h: 108px; }
 
       html, body { min-height: 100%; margin: 0; background: #0f0f0f; color: #f0f0f0; }
       body { font-family: 'Exo 2', system-ui, sans-serif; font-synthesis: none; }
 
-      /* ── Mobile fade-in animation ───────────────────────────── */
       @keyframes hw-mobile-fade-in {
         from { opacity: 0; }
         to   { opacity: 1; }
@@ -56,7 +53,6 @@ const isHomePage = Astro.url.pathname === '/';
         animation: hw-mobile-fade-in 220ms cubic-bezier(0.4, 0, 0.2, 1) both;
       }
 
-      /* ── Atmosphere grain ───────────────────────────────────── */
       #atmo-grain {
         position: fixed; inset: 0; z-index: 40;
         pointer-events: none; opacity: 0.06;
@@ -68,7 +64,6 @@ const isHomePage = Astro.url.pathname === '/';
         mix-blend-mode: soft-light;
       }
 
-      /* ── Scroll reveal ──────────────────────────────────────── */
       .hw-scroll-reveal {
         opacity: 0;
         transform: translate3d(0, 18px, 0);
@@ -83,14 +78,14 @@ const isHomePage = Astro.url.pathname === '/';
         .hw-scroll-reveal { opacity: 1; transform: none; transition: none; }
       }
 
-      /* ── Page-transition overlay ────────────────────────────── */
       #pt-overlay {
-        position: fixed; inset: 0; z-index: 10000;
+        position: fixed; left: 0; right: 0; bottom: 0; z-index: 10000;
+        top: 0;
         background: #080808; pointer-events: none;
         opacity: 0; will-change: opacity;
       }
       @media (min-width: 993px) {
-        #pt-overlay { top: calc(var(--topbar-h) + var(--nav-h)); }
+        #pt-overlay { top: var(--header-h); }
       }
       #pt-line {
         position: absolute; left: 0; right: 0; height: 2px;
@@ -106,7 +101,6 @@ const isHomePage = Astro.url.pathname === '/';
       @media (min-width: 993px) { #pt-trail { filter: blur(10px); } }
     </style>
 
-    <!-- Runs before first paint: applies mobile fade-in class if needed -->
     <script is:inline>
       (function () {
         try {
@@ -124,11 +118,6 @@ const isHomePage = Astro.url.pathname === '/';
   </head>
 
   <body class:list={[isHomePage ? 'page-home' : 'page-subpage']}>
-    <!--
-      NO transition:persist here.
-      The pt script re-captures DOM refs after every swap and immediately
-      re-applies the current animation state, preventing any opacity flash.
-    -->
     <div id="pt-overlay" aria-hidden="true">
       <div id="pt-trail"></div>
       <div id="pt-line"></div>
@@ -149,7 +138,6 @@ const isHomePage = Astro.url.pathname === '/';
       };
     </script>
 
-    <!-- ── Scroll reveal ─────────────────────────────────────── -->
     <script is:inline>
     (function () {
       function init() {
@@ -161,7 +149,6 @@ const isHomePage = Astro.url.pathname === '/';
         var isMobile     = window.matchMedia('(max-width: 992px)').matches;
         var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-        // First section always visible
         sections[0].classList.remove('hw-scroll-reveal');
         sections[0].classList.add('is-inview');
 
@@ -192,33 +179,22 @@ const isHomePage = Astro.url.pathname === '/';
     }());
     </script>
 
-    <!-- ── Page transition ──────────────────────────────────── -->
     <script is:inline>
     (function () {
       if (window.__ptReady) return;
       window.__ptReady = true;
 
-      // ── Timing ──────────────────────────────────────────────
-      var FADE_IN    = 80;   // ms — overlay blacks out
-      var SCAN       = 320;  // ms — scanline travels full height
-      var FADE_OUT   = 240;  // ms — overlay lifts, new page revealed
-      var TRAIL_FADE = 160;  // ms — glow trail decay
-      var JITTER_MS  = 95;   // ms — electrical jitter on scan start
+      var HEADER_H   = 108;
+      var FADE_IN    = 80;
+      var SCAN       = 320;
+      var FADE_OUT   = 240;
+      var TRAIL_FADE = 160;
+      var JITTER_MS  = 95;
 
-      // ── State ────────────────────────────────────────────────
-      var raf          = 0;
-      var swapDone     = false;
-      var outDone      = false;
-      var navDirection = 'forward';
-      var isHistoryNav = false;
+      var raf = 0, swapDone = false, outDone = false;
+      var navDirection = 'forward', isHistoryNav = false;
+      var sOverlay = 0, sLineY = -4, sLineX = 0, sTrail = 0;
 
-      // Rendered values — preserved across DOM swaps
-      var sOverlay = 0;
-      var sLineY   = -4;
-      var sLineX   = 0;
-      var sTrail   = 0;
-
-      // ── DOM refs — refreshed after every swap ────────────────
       var el = {};
       function captureRefs() {
         el.overlay = document.getElementById('pt-overlay');
@@ -227,8 +203,6 @@ const isHomePage = Astro.url.pathname === '/';
       }
       captureRefs();
 
-      // Called immediately after captureRefs() so the new overlay
-      // never shows a stale opacity:0 frame before we set it.
       function applyState() {
         if (!el.overlay) return;
         el.overlay.style.opacity = String(sOverlay);
@@ -238,27 +212,18 @@ const isHomePage = Astro.url.pathname === '/';
         el.trail.style.transform = 'translate3d(' + (sLineX * 0.6) + 'px,' + (sLineY - 8) + 'px,0)';
       }
 
-      // ── Setters (update state + DOM together) ────────────────
-      function setOverlay(v) {
-        sOverlay = v;
-        if (el.overlay) el.overlay.style.opacity = String(v);
-      }
+      function setOverlay(v) { sOverlay = v; if (el.overlay) el.overlay.style.opacity = String(v); }
       function setScan(y, x) {
         sLineY = y; sLineX = x;
         if (el.line)  el.line.style.transform  = 'translate3d(' + x + 'px,' + y + 'px,0)';
         if (el.trail) el.trail.style.transform = 'translate3d(' + (x * 0.6) + 'px,' + (y - 8) + 'px,0)';
       }
-      function setTrail(v) {
-        sTrail = v;
-        if (el.trail) el.trail.style.opacity = String(v);
-      }
+      function setTrail(v) { sTrail = v; if (el.trail) el.trail.style.opacity = String(v); }
 
-      // ── Easing ───────────────────────────────────────────────
       function ease(t)   { return t < 0.5 ? 2*t*t : -1+(4-2*t)*t; }
       function inExpo(t) { return t === 0 ? 0 : Math.pow(2, 10*(t-1)); }
       function stop()    { if (raf) { cancelAnimationFrame(raf); raf = 0; } }
 
-      // ── History direction tracking ───────────────────────────
       var seq     = Number(sessionStorage.getItem('__ptSeq') || '0');
       var lastIdx = (history.state && typeof history.state.__ptIdx === 'number')
                     ? history.state.__ptIdx : seq;
@@ -289,7 +254,6 @@ const isHomePage = Astro.url.pathname === '/';
         } catch (_) {}
       }, true);
 
-      // ── Reveal: fade overlay out after swap ──────────────────
       function tryReveal() {
         if (!swapDone || !outDone) return;
         stop();
@@ -299,17 +263,11 @@ const isHomePage = Astro.url.pathname === '/';
         (function tick(now) {
           var t = Math.min((now - start) / FADE_OUT, 1);
           setOverlay(1 - ease(t));
-          if (t < 1) {
-            raf = requestAnimationFrame(tick);
-          } else {
-            setOverlay(0);
-            swapDone = false;
-            outDone  = false;
-          }
+          if (t < 1) { raf = requestAnimationFrame(tick); }
+          else { setOverlay(0); swapDone = false; outDone = false; }
         }(performance.now()));
       }
 
-      // ── Out animation: before page swap ─────────────────────
       function animOut(ev) {
         stop();
         swapDone = false;
@@ -320,41 +278,18 @@ const isHomePage = Astro.url.pathname === '/';
         var desktop = window.innerWidth > 992;
 
         if (!desktop) {
-          // Mobile: simple fade to black
           setOverlay(0);
           var mStart = performance.now();
           (function mobileTick(now) {
             var e = now - mStart;
             setOverlay(Math.min(e / FADE_IN, 1));
-            if (e < FADE_IN + SCAN) {
-              raf = requestAnimationFrame(mobileTick);
-            } else {
-              outDone = true;
-              tryReveal();
-            }
+            if (e < FADE_IN + SCAN) { raf = requestAnimationFrame(mobileTick); }
+            else { outDone = true; tryReveal(); }
           }(performance.now()));
           return;
         }
 
-        // Desktop: scanline sweep
-        // Measure actual rendered overlay height directly
-        var overlayEl = document.getElementById('pt-overlay');
-        var travel;
-        if (overlayEl) {
-          var rect = overlayEl.getBoundingClientRect();
-          // If height == full viewport, CSS variables not yet applied
-          if (rect.height >= window.innerHeight - 5) {
-            var topbarEl = document.querySelector('.topbar');
-            var headerEl = document.getElementById('header');
-            var headerH = (topbarEl ? topbarEl.getBoundingClientRect().height : 36)
-                        + (headerEl ? headerEl.getBoundingClientRect().height : 72);
-            travel = window.innerHeight - headerH;
-          } else {
-            travel = rect.height;
-          }
-        } else {
-          travel = window.innerHeight - 108;
-        }
+        var travel   = window.innerHeight - HEADER_H;
         var startY   = isBack ? travel * 1.08 : -4;
         var endY     = isBack ? -4 : travel * 1.08;
         var dist     = endY - startY;
@@ -378,18 +313,11 @@ const isHomePage = Astro.url.pathname === '/';
             setTrail(0.82 * (1 - inExpo(tf)));
           }
 
-          if (e < FADE_IN + SCAN) {
-            raf = requestAnimationFrame(tick);
-          } else {
-            setTrail(0);
-            setScan(endY, 0);
-            outDone = true;
-            tryReveal();
-          }
+          if (e < FADE_IN + SCAN) { raf = requestAnimationFrame(tick); }
+          else { setTrail(0); setScan(endY, 0); outDone = true; tryReveal(); }
         }(performance.now()));
       }
 
-      // ── Mobile fade-in after swap ────────────────────────────
       function triggerMobileFade() {
         if (!window.matchMedia('(max-width: 992px)').matches) return;
         document.documentElement.classList.remove('hw-mobile-fade-enter');
@@ -399,13 +327,9 @@ const isHomePage = Astro.url.pathname === '/';
         });
       }
 
-      // ── Astro hooks ──────────────────────────────────────────
       document.addEventListener('astro:before-preparation', animOut);
 
       document.addEventListener('astro:after-swap', function () {
-        // Re-capture refs to the freshly swapped-in DOM elements, then
-        // immediately apply the current animation state (synchronously,
-        // before the browser can paint the new overlay at opacity:0).
         captureRefs();
         applyState();
 
