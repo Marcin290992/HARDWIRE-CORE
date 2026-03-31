@@ -114,6 +114,7 @@ const icons = {
   letter-spacing: 0.3em;
   text-transform: uppercase;
   color: var(--red);
+  text-shadow: 0 0 16px rgba(220, 38, 38, 0.35);
 }
 
 .rtl__header h2 {
@@ -189,6 +190,7 @@ const icons = {
   border-color: var(--red);
   background: var(--red);
   transform: scale(1.4);
+  box-shadow: 0 0 16px rgba(220, 38, 38, 0.4);
 }
 
 .rtl__content {
@@ -208,6 +210,7 @@ const icons = {
   font-size: clamp(1.4rem, 2.5vw, 2rem);
   color: var(--text);
   line-height: 1;
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.06);
 }
 
 .rtl__time-unit {
@@ -238,12 +241,15 @@ const icons = {
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.2s var(--ease), transform 0.2s var(--ease);
-  background: var(--bg);
+  background: rgba(8, 8, 8, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--red-border);
   clip-path: var(--clip-cut);
   padding: 0.65rem 0.85rem;
   white-space: nowrap;
   z-index: 20;
+  box-shadow: 0 0 24px rgba(220, 38, 38, 0.1);
 }
 
 .rtl__tooltip::after {

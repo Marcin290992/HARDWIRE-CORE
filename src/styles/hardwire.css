@@ -770,6 +770,7 @@ body.menu-open #wa-widget {
   text-transform: uppercase;
   color: var(--red);
   margin-bottom: 22px;
+  text-shadow: 0 0 16px rgba(220, 38, 38, 0.35);
   opacity: 0;
   animation: hw-slide-right 0.7s var(--ease) 0.2s forwards;
 }
@@ -798,6 +799,7 @@ body.menu-open #wa-widget {
   color: var(--red);
   font-style: normal;
   position: relative;
+  text-shadow: 0 0 40px rgba(220, 38, 38, 0.3), 0 0 80px rgba(220, 38, 38, 0.12);
 }
 
 .hw-hero__title em::after {
@@ -817,8 +819,11 @@ body.menu-open #wa-widget {
   align-items: center;
   gap: 8px;
   background: rgba(0, 212, 255, 0.08);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   border: 1px solid rgba(0, 212, 255, 0.25);
   color: #00d4ff;
+  text-shadow: 0 0 16px rgba(0, 212, 255, 0.3);
   padding: 7px 14px;
   font-family: var(--font-mono);
   font-size: 9px;
@@ -861,11 +866,13 @@ body.menu-open #wa-widget {
   min-width: 160px;
   padding: 14px 16px;
   background: rgba(15, 15, 15, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   border: 1px solid var(--border2);
   border-left: 3px solid var(--red);
   position: relative;
   overflow: hidden;
-  transition: border-color 0.25s var(--ease), background 0.25s var(--ease), transform 0.25s var(--ease);
+  transition: border-color 0.25s var(--ease), background 0.25s var(--ease), transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
   opacity: 0;
 }
 
@@ -907,10 +914,12 @@ body.menu-open #wa-widget {
 .hw-hero__card:hover {
   background: rgba(220, 38, 38, 0.07);
   transform: translateY(-4px);
+  box-shadow: 0 0 30px rgba(220, 38, 38, 0.08), inset 0 0 30px rgba(220, 38, 38, 0.03);
 }
 
 .hw-hero__card--ai:hover {
   background: rgba(0, 212, 255, 0.06);
+  box-shadow: 0 0 30px rgba(0, 212, 255, 0.08), inset 0 0 30px rgba(0, 212, 255, 0.03);
 }
 
 .hw-hero__card-icon {
@@ -1695,6 +1704,7 @@ body.menu-open #wa-widget {
     text-transform: uppercase;
     color: var(--red);
     margin-bottom: 20px;
+    text-shadow: 0 0 16px rgba(220, 38, 38, 0.35);
   }
 
   .manifesto__heading {
@@ -1710,6 +1720,7 @@ body.menu-open #wa-widget {
   .manifesto__heading em {
     color: var(--red);
     font-style: normal;
+    text-shadow: 0 0 30px rgba(220, 38, 38, 0.3);
   }
 
   .manifesto__codex {
@@ -1740,6 +1751,7 @@ body.menu-open #wa-widget {
     opacity: 0.6;
     flex-shrink: 0;
     width: 20px;
+    text-shadow: 0 0 12px rgba(220, 38, 38, 0.3);
   }
 
   .manifesto__line-text {
@@ -1803,12 +1815,14 @@ body.menu-open #wa-widget {
     line-height: 1;
     letter-spacing: -0.01em;
     color: var(--text);
+    text-shadow: 0 0 24px rgba(255, 255, 255, 0.06);
   }
 
   .manifesto__stat-num em {
     color: var(--red);
     font-style: normal;
     font-size: 0.65em;
+    text-shadow: 0 0 20px rgba(220, 38, 38, 0.3);
   }
 
   .manifesto__stat-label {
@@ -1831,12 +1845,16 @@ body.menu-open #wa-widget {
     margin-top: 1.5rem;
     padding: 10px 16px;
     background: rgba(220, 38, 38, 0.07);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     border: 1px solid var(--red-border);
     font-family: var(--font-mono);
     font-size: 11px;
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--red);
+    text-shadow: 0 0 14px rgba(220, 38, 38, 0.3);
+    box-shadow: 0 0 24px rgba(220, 38, 38, 0.08);
     clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
   }
 
@@ -1845,6 +1863,7 @@ body.menu-open #wa-widget {
     height: 6px;
     border-radius: 50%;
     background: var(--red);
+    box-shadow: 0 0 10px rgba(220, 38, 38, 0.4);
     flex-shrink: 0;
     animation: pulse-dot 2s ease-in-out infinite;
   }
