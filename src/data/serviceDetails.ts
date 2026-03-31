@@ -7,6 +7,7 @@ export interface ServiceSection {
 
 export interface ServiceDetail {
   slug: string;
+  heroImg: string;
   title: string;
   description: string;
   lead: string;
@@ -31,6 +32,7 @@ export interface ServiceDetail {
 export const serviceDetails: Record<string, ServiceDetail> = {
   'laptop-repairs': {
     slug: 'laptop-repairs',
+    heroImg: 'https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=1200&h=500&fit=crop',
     title: 'Laptop Repairs',
     description: 'Laptop repair service in Stanwell TW19 with same-day diagnostics and clear pricing from £49.',
     lead: 'From cracked screens to charging faults, I repair laptops daily for customers in Stanwell and nearby Surrey areas.',
@@ -80,6 +82,7 @@ export const serviceDetails: Record<string, ServiceDetail> = {
   },
   'screen-replacement': {
     slug: 'screen-replacement',
+    heroImg: 'https://images.unsplash.com/photo-1611078489935-0cb964de46d6?w=1200&h=500&fit=crop',
     title: 'Screen Replacement',
     description: 'Laptop and monitor screen replacement in Stanwell TW19 using quality compatible panels from £69.',
     lead: 'Broken, flickering, or black display? I confirm whether the fault is panel, cable, or GPU before replacing anything.',
@@ -129,6 +132,7 @@ export const serviceDetails: Record<string, ServiceDetail> = {
   },
   'keyboard-replacement': {
     slug: 'keyboard-replacement',
+    heroImg: 'https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=1200&h=500&fit=crop',
     title: 'Keyboard Replacement',
     description: 'Laptop keyboard replacement and key failure repair in Stanwell TW19 from £45.',
     lead: 'Missing keys, sticky keys, or liquid spill damage can usually be fixed quickly with the right keyboard assembly.',
@@ -178,6 +182,7 @@ export const serviceDetails: Record<string, ServiceDetail> = {
   },
   'charging-port-repair': {
     slug: 'charging-port-repair',
+    heroImg: 'https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?w=1200&h=500&fit=crop',
     title: 'Charging Port Repair',
     description: 'Laptop charging port diagnosis and repair in Stanwell TW19, including USB-C and barrel jack faults, from £49.',
     lead: 'If your charger only works at an angle or stops intermittently, the charging port or power circuit is usually the cause.',
@@ -227,6 +232,7 @@ export const serviceDetails: Record<string, ServiceDetail> = {
   },
   'motherboard-diagnosis': {
     slug: 'motherboard-diagnosis',
+    heroImg: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=1200&h=500&fit=crop',
     title: 'Motherboard Diagnosis',
     description: 'Component-level motherboard diagnostics for laptops and desktops in Stanwell TW19 from £39.',
     lead: 'No POST, no power, random shutdowns, or burnt components - I trace board-level faults before recommending repair or replacement.',
@@ -276,6 +282,7 @@ export const serviceDetails: Record<string, ServiceDetail> = {
   },
   'desktop-repairs': {
     slug: 'desktop-repairs',
+    heroImg: 'https://images.unsplash.com/photo-1587831990711-23ca6441447b?w=1200&h=500&fit=crop',
     title: 'Desktop PC Repairs',
     description: 'Desktop PC diagnostics and repair in Stanwell TW19, including no display and boot issues, from £49.',
     lead: 'Custom builds and office desktops are repaired with structured component testing and clear repair options.',
@@ -325,6 +332,7 @@ export const serviceDetails: Record<string, ServiceDetail> = {
   },
   'hardware-upgrades': {
     slug: 'hardware-upgrades',
+    heroImg: 'https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?w=1200&h=500&fit=crop',
     title: 'Hardware Upgrades',
     description: 'RAM, SSD, and GPU upgrades in Stanwell TW19 with compatibility checks from £35.',
     lead: 'I upgrade your machine with the right parts for your workload, not random components that may cause instability.',
@@ -374,6 +382,7 @@ export const serviceDetails: Record<string, ServiceDetail> = {
   },
   'deep-cleaning': {
     slug: 'deep-cleaning',
+    heroImg: 'https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?w=1200&h=500&fit=crop',
     title: 'Deep Cleaning',
     description: 'Internal deep cleaning and thermal service for laptops and desktops in Stanwell TW19 from £39.',
     lead: 'Overheating, fan noise, and performance drops are often caused by dust and old thermal paste, not dead hardware.',
@@ -423,6 +432,7 @@ export const serviceDetails: Record<string, ServiceDetail> = {
   },
   'pc-build': {
     slug: 'pc-build',
+    heroImg: 'https://images.unsplash.com/photo-1555680202-c86f0e12f086?w=1200&h=500&fit=crop',
     title: 'Custom PC Build',
     description: 'Custom PC build service in Stanwell TW19 including part planning, build, and testing. Price on application.',
     lead: 'From gaming rigs to workstation setups, I build systems around your real needs, budget, and upgrade path.',
@@ -472,6 +482,7 @@ export const serviceDetails: Record<string, ServiceDetail> = {
   },
   'virus-removal': {
     slug: 'virus-removal',
+    heroImg: 'https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=1200&h=500&fit=crop',
     title: 'Virus & Malware Removal',
     description: 'Professional malware and virus removal in Stanwell TW19 with data-safe cleanup from £49.',
     lead: 'If your machine is slow, flooded with popups, or behaving strangely, I perform a full cleanup and security reset.',
@@ -521,6 +532,7 @@ export const serviceDetails: Record<string, ServiceDetail> = {
   },
   'os-installation': {
     slug: 'os-installation',
+    heroImg: 'https://images.unsplash.com/photo-1629654297299-c8506221ca97?w=1200&h=500&fit=crop',
     title: 'OS Installation',
     description: 'Windows 11 and Linux installation service in Stanwell TW19, including drivers and updates, from £59.',
     lead: 'Need a clean operating system setup? I install, configure, and optimize your system with proper drivers and updates.',
@@ -570,6 +582,7 @@ export const serviceDetails: Record<string, ServiceDetail> = {
   },
   'software-troubleshooting': {
     slug: 'software-troubleshooting',
+    heroImg: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=1200&h=500&fit=crop',
     title: 'Software Troubleshooting',
     description: 'Software crash and stability troubleshooting in Stanwell TW19 from £39.',
     lead: 'Frequent crashes, blue screens, and random freezes are diagnosed methodically to isolate the true cause.',
@@ -619,6 +632,7 @@ export const serviceDetails: Record<string, ServiceDetail> = {
   },
   'speed-boost': {
     slug: 'speed-boost',
+    heroImg: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&h=500&fit=crop',
     title: 'Speed Enhancement',
     description: 'PC and laptop speed optimization in Stanwell TW19 from £49.',
     lead: 'I tune startup, remove bloat, and improve thermal behavior so your machine feels fast again.',
@@ -668,6 +682,7 @@ export const serviceDetails: Record<string, ServiceDetail> = {
   },
   'data-recovery': {
     slug: 'data-recovery',
+    heroImg: 'https://images.unsplash.com/photo-1531492746076-161ca9bcad58?w=1200&h=500&fit=crop',
     title: 'Data Recovery',
     description: 'Data recovery service in Stanwell TW19 for failed drives, deleted files, and corrupted partitions from £79.',
     lead: 'I recover photos, documents, and business files from many logical and hardware-related storage failures.',
@@ -717,6 +732,7 @@ export const serviceDetails: Record<string, ServiceDetail> = {
   },
   'ssd-upgrade': {
     slug: 'ssd-upgrade',
+    heroImg: 'https://images.unsplash.com/photo-1597138804456-e7dca7f59d54?w=1200&h=500&fit=crop',
     title: 'SSD Upgrade',
     description: 'HDD to SSD upgrade and migration in Stanwell TW19 from £49.',
     lead: 'An SSD upgrade is often the single biggest real-world performance improvement for older systems.',
@@ -766,6 +782,7 @@ export const serviceDetails: Record<string, ServiceDetail> = {
   },
   'backup-setup': {
     slug: 'backup-setup',
+    heroImg: 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=1200&h=500&fit=crop',
     title: 'Backup Setup',
     description: 'Automated cloud and local backup setup in Stanwell TW19 from £35.',
     lead: 'I configure practical backups so your key files stay protected against deletion, failure, and ransomware.',
@@ -815,6 +832,7 @@ export const serviceDetails: Record<string, ServiceDetail> = {
   },
   'network-setup': {
     slug: 'network-setup',
+    heroImg: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&h=500&fit=crop',
     title: 'Network Setup',
     description: 'Home and small office network setup in Stanwell TW19 from £49.',
     lead: 'I configure routers, extenders, and wired links for reliable coverage and practical real-world speed.',
@@ -864,6 +882,7 @@ export const serviceDetails: Record<string, ServiceDetail> = {
   },
   'wifi-troubleshooting': {
     slug: 'wifi-troubleshooting',
+    heroImg: 'https://images.unsplash.com/photo-1606904825846-647eb07f5be2?w=1200&h=500&fit=crop',
     title: 'Wi-Fi Troubleshooting',
     description: 'Wi-Fi fault diagnosis and optimization in Stanwell TW19 from £39.',
     lead: 'Intermittent drops and slow wireless speeds are diagnosed by isolating router, environment, and device factors.',
@@ -913,6 +932,7 @@ export const serviceDetails: Record<string, ServiceDetail> = {
   },
   'health-check': {
     slug: 'health-check',
+    heroImg: 'https://images.unsplash.com/photo-1563770660941-20978e870e26?w=1200&h=500&fit=crop',
     title: 'PC Health Check',
     description: 'Full no-obligation computer health check in Stanwell TW19 with written findings and free assessment.',
     lead: 'A complete diagnostic of hardware and software so you know exactly what is healthy, what is risky, and what can wait.',

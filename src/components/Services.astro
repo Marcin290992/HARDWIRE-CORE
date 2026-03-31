@@ -115,6 +115,7 @@ const orderedServices = services;
     <div class="services__header">
       <div>
         <span class="services__eyebrow">// What I fix</span>
+        <span class="services__title-line" aria-hidden="true"></span>
         <h2 class="services__title">
           Choose one service.<br>
           <em>Focus on what matters.</em>
@@ -299,7 +300,15 @@ const orderedServices = services;
   letter-spacing: 0.3em;
   text-transform: uppercase;
   color: var(--red);
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.services__title-line {
+  display: block;
+  width: 32px;
+  height: 2px;
+  background: var(--red);
+  margin-bottom: 0.75rem;
 }
 
 .services__title {
@@ -341,7 +350,9 @@ const orderedServices = services;
 }
 
 .services__nav {
-  background: var(--bg3);
+  background: rgba(255,255,255,0.02);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
   border: 1px solid var(--border);
   clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px));
   padding: 0.65rem;
@@ -396,7 +407,12 @@ const orderedServices = services;
 .services__nav-item.is-active {
   border-color: rgba(220,38,38,0.45);
   color: var(--text);
-  background: rgba(220,38,38,0.08);
+  background: linear-gradient(to right, rgba(220,38,38,0.1), transparent);
+}
+
+.services__nav-item.is-active .services__nav-index {
+  opacity: 1;
+  text-shadow: 0 0 6px rgba(220,38,38,0.6);
 }
 
 .services__nav-item.is-active .services__nav-time {
@@ -436,7 +452,7 @@ const orderedServices = services;
   position: relative;
   overflow: hidden;
   border: 1px solid rgba(220,38,38,0.32);
-  background: var(--bg);
+  background: linear-gradient(to bottom, rgba(10,10,12,1), rgba(18,18,22,1));
   clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px));
   min-height: 410px;
 }
@@ -543,12 +559,13 @@ const orderedServices = services;
   display: flex;
   align-items: center;
   justify-content: center;
-  clip-path: polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);
+  border-radius: 12px;
+  box-shadow: 0 0 0 1px rgba(220,38,38,0.3), 0 0 24px rgba(220,38,38,0.12);
 }
 
 .services__panel-icon :global(svg) {
-  width: 28px;
-  height: 28px;
+  width: 32px;
+  height: 32px;
   stroke: var(--red);
 }
 
@@ -569,6 +586,10 @@ const orderedServices = services;
   letter-spacing: 0.035em;
   color: var(--text);
   line-height: 1.2;
+  background: linear-gradient(135deg, #ffffff 40%, rgba(220,38,38,0.85) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .services__panel-desc {
@@ -629,6 +650,20 @@ const orderedServices = services;
 
 .services__terminal-body span {
   color: var(--red);
+  text-shadow: 0 0 8px rgba(220,38,38,0.5);
+}
+
+.services__terminal-body p:last-child::after {
+  content: '\25CB';
+  display: inline-block;
+  margin-left: 0.5em;
+  color: var(--red);
+  animation: blink-cursor 1s step-end infinite;
+}
+
+@keyframes blink-cursor {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
 }
 
 .services__panel-meta {
@@ -677,11 +712,22 @@ const orderedServices = services;
   background: var(--red);
   font-family: var(--font-head);
   font-size: 10px;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: #fff;
   clip-path: polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));
   transition: background 0.2s ease;
+}
+
+.services__cta::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: rgba(255,255,255,0.18);
+  pointer-events: none;
 }
 .services__cta:hover { background: var(--red-dark); }
 .services__cta:active { transform: scale(0.98); }
@@ -725,7 +771,8 @@ const orderedServices = services;
   display: block;
   height: 100%;
   width: 24%;
-  background: var(--red);
+  background: linear-gradient(to right, rgba(220,38,38,0.6), var(--red));
+  box-shadow: 4px 0 12px rgba(220,38,38,0.4);
   transition: width 280ms var(--ease);
 }
 

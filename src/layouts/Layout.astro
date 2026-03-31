@@ -42,7 +42,7 @@ const isHomePage = Astro.url.pathname === '/';
 
       :root { color-scheme: dark; --topbar-h: 36px; --nav-h: 72px; --header-h: 108px; }
 
-      html, body { min-height: 100%; margin: 0; background: #0f0f0f; color: #f0f0f0; }
+      html, body { min-height: 100%; margin: 0; background: #080808; color: #f0f0f0; }
       body { font-family: 'Exo 2', system-ui, sans-serif; font-synthesis: none; }
 
       @keyframes hw-mobile-fade-in {
@@ -147,6 +147,7 @@ const isHomePage = Astro.url.pathname === '/';
     <script is:inline>
     (function () {
       function init() {
+        if (!document.body.classList.contains('page-home')) return;
         var main = document.querySelector('main');
         if (!main) return;
         var sections = Array.prototype.slice.call(main.querySelectorAll(':scope > section'));
