@@ -14,7 +14,13 @@ import Footer  from '../components/Footer.astro';
 
     <!-- ═══ PANEL 1 — HERO ═══ -->
     <section class="about-panel about-panel--hero">
+      <div class="about-scanline" aria-hidden="true"></div>
+      <div class="about-grid-bg" aria-hidden="true"></div>
       <div class="about-panel__inner">
+        <div class="about-hero__badge-top">
+          <span class="about-hero__badge-dot"></span>
+          Est. 2019 · Stanwell TW19
+        </div>
         <span class="about-eyebrow">// About</span>
         <h1 class="about-hero__heading">
           One engineer.<br />
@@ -25,45 +31,56 @@ import Footer  from '../components/Footer.astro';
           Hardwire Core is not a chain, not a call centre, not a faceless ticket system.<br />
           It's me — diagnosing, repairing and returning your machine the same day whenever I can.
         </p>
+        <div class="about-hero__line" aria-hidden="true"></div>
         <div class="about-hero__scroll-hint" aria-hidden="true">
+          <span>Scroll</span>
           <svg width="20" height="32" viewBox="0 0 20 32" fill="none"><rect x="1" y="1" width="18" height="30" rx="9" stroke="currentColor" stroke-width="1.4"/><circle cx="10" cy="10" r="2" fill="currentColor" class="about-dot"/></svg>
         </div>
       </div>
+      <div class="about-corner about-corner--tl" aria-hidden="true"></div>
+      <div class="about-corner about-corner--tr" aria-hidden="true"></div>
+      <div class="about-corner about-corner--bl" aria-hidden="true"></div>
+      <div class="about-corner about-corner--br" aria-hidden="true"></div>
     </section>
 
     <!-- ═══ PANEL 2 — MY RULES ═══ -->
     <section class="about-panel about-panel--rules">
+      <div class="about-scanline" aria-hidden="true"></div>
       <div class="about-panel__inner">
         <span class="about-eyebrow">// My rules</span>
-        <h2 class="about-section__heading">The Hardwire Codex</h2>
+        <h2 class="about-section__heading">The Hardwire <em>Codex</em></h2>
         <ul class="about-codex" role="list">
           <li>
             <span class="about-codex__num">01</span>
-            <div>
+            <div class="about-codex__content">
               <strong>Diagnose first.</strong>
               <p>I never guess your money away. Every repair starts with a proper diagnosis — no shortcuts, no assumptions.</p>
             </div>
+            <span class="about-codex__glyph" aria-hidden="true">&lt;/&gt;</span>
           </li>
           <li>
             <span class="about-codex__num">02</span>
-            <div>
+            <div class="about-codex__content">
               <strong>No fix — no fee.</strong>
               <p>That's not marketing. That's a promise. If I can't fix it, you don't pay a penny.</p>
             </div>
+            <span class="about-codex__glyph" aria-hidden="true">&#9632;</span>
           </li>
           <li>
             <span class="about-codex__num">03</span>
-            <div>
+            <div class="about-codex__content">
               <strong>Your data stays yours.</strong>
               <p>I don't snoop, I don't copy, I don't touch what I don't need to. Full stop.</p>
             </div>
+            <span class="about-codex__glyph" aria-hidden="true">&#9670;</span>
           </li>
           <li>
             <span class="about-codex__num">04</span>
-            <div>
+            <div class="about-codex__content">
               <strong>Plain English. Always.</strong>
               <p>No jargon walls. I tell you what's wrong, what it costs, and how long it takes — clearly.</p>
             </div>
+            <span class="about-codex__glyph" aria-hidden="true">&gt;_</span>
           </li>
         </ul>
       </div>
@@ -71,27 +88,40 @@ import Footer  from '../components/Footer.astro';
 
     <!-- ═══ PANEL 3 — HOW I WORK ═══ -->
     <section class="about-panel about-panel--process">
+      <div class="about-scanline" aria-hidden="true"></div>
       <div class="about-panel__inner">
         <span class="about-eyebrow">// How I work</span>
-        <h2 class="about-section__heading">From message to fixed</h2>
+        <h2 class="about-section__heading">From message to <em>fixed</em></h2>
         <div class="about-steps">
           <div class="about-step">
-            <span class="about-step__icon">01</span>
+            <div class="about-step__head">
+              <span class="about-step__icon">01</span>
+              <div class="about-step__line" aria-hidden="true"></div>
+            </div>
             <h3>You reach out</h3>
             <p>WhatsApp, call or the form on this site. Tell me what's going on — I'll reply fast.</p>
           </div>
           <div class="about-step">
-            <span class="about-step__icon">02</span>
+            <div class="about-step__head">
+              <span class="about-step__icon">02</span>
+              <div class="about-step__line" aria-hidden="true"></div>
+            </div>
             <h3>Free diagnosis</h3>
             <p>I take a proper look, find the root cause, and quote you a fair price before anything else.</p>
           </div>
           <div class="about-step">
-            <span class="about-step__icon">03</span>
+            <div class="about-step__head">
+              <span class="about-step__icon">03</span>
+              <div class="about-step__line" aria-hidden="true"></div>
+            </div>
             <h3>The repair</h3>
             <p>Hands-on work at my bench. Most jobs done same day. I keep you updated throughout.</p>
           </div>
           <div class="about-step">
-            <span class="about-step__icon">04</span>
+            <div class="about-step__head">
+              <span class="about-step__icon">04</span>
+              <div class="about-step__line" aria-hidden="true"></div>
+            </div>
             <h3>Collect &amp; go</h3>
             <p>Pick up your machine, fully tested. You only pay if it's fixed — guaranteed.</p>
           </div>
@@ -101,9 +131,11 @@ import Footer  from '../components/Footer.astro';
 
     <!-- ═══ PANEL 4 — STATS ═══ -->
     <section class="about-panel about-panel--stats">
+      <div class="about-scanline" aria-hidden="true"></div>
+      <div class="about-grid-bg" aria-hidden="true"></div>
       <div class="about-panel__inner">
         <span class="about-eyebrow">// Track record</span>
-        <h2 class="about-section__heading">Numbers don't lie</h2>
+        <h2 class="about-section__heading">Numbers don't <em>lie</em></h2>
         <div class="about-stats">
           <div class="about-stat">
             <span class="about-stat__num">500<em>+</em></span>
@@ -131,15 +163,17 @@ import Footer  from '../components/Footer.astro';
 
     <!-- ═══ PANEL 5 — CTA (last, not pinned) ═══ -->
     <section class="about-panel about-panel--cta">
+      <div class="about-scanline" aria-hidden="true"></div>
       <div class="about-panel__inner">
-        <h2 class="about-cta__heading">Ready to get it fixed?</h2>
+        <span class="about-eyebrow">// Let's go</span>
+        <h2 class="about-cta__heading">Ready to get it <em>fixed</em>?</h2>
         <p class="about-cta__sub">Drop me a message — I usually reply within the hour.</p>
         <div class="about-cta__buttons">
-          <a href="https://wa.me/447404440404" target="_blank" rel="noopener" class="about-btn about-btn--wa">
+          <a href="https://wa.me/447575701219" target="_blank" rel="noopener" class="about-btn about-btn--wa">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.611.611l4.458-1.495A11.943 11.943 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.317 0-4.46-.768-6.183-2.064l-.432-.336-3.2 1.072 1.072-3.2-.336-.432A9.953 9.953 0 012 12C2 6.486 6.486 2 12 2s10 4.486 10 10-4.486 10-10 10z"/></svg>
             WhatsApp
           </a>
-          <a href="/#contact" class="about-btn about-btn--outline">Book a repair</a>
+          <a href="#" class="about-btn about-btn--outline" onclick="event.preventDefault(); openContactModal();">Book a repair</a>
         </div>
       </div>
     </section>
@@ -154,7 +188,66 @@ import Footer  from '../components/Footer.astro';
      ═══════════════════════════════════════════ -->
 <style is:inline>
 
-/* --- layout --- */
+/* ═══ SCANLINE OVERLAY ═══ */
+.about-scanline {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,0,0,0.12) 2px,
+    rgba(0,0,0,0.12) 4px
+  );
+  mix-blend-mode: multiply;
+}
+
+/* ═══ GRID BG ═══ */
+.about-grid-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.03;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* ═══ CORNER BRACKETS ═══ */
+.about-corner {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  z-index: 3;
+  pointer-events: none;
+}
+.about-corner::before,
+.about-corner::after {
+  content: '';
+  position: absolute;
+  background: var(--red);
+  opacity: 0.25;
+}
+.about-corner::before { width: 28px; height: 1px; }
+.about-corner::after  { width: 1px; height: 28px; }
+.about-corner--tl { top: 24px; left: 24px; }
+.about-corner--tl::before { top: 0; left: 0; }
+.about-corner--tl::after  { top: 0; left: 0; }
+.about-corner--tr { top: 24px; right: 24px; }
+.about-corner--tr::before { top: 0; right: 0; }
+.about-corner--tr::after  { top: 0; right: 0; }
+.about-corner--bl { bottom: 24px; left: 24px; }
+.about-corner--bl::before { bottom: 0; left: 0; }
+.about-corner--bl::after  { bottom: 0; left: 0; }
+.about-corner--br { bottom: 24px; right: 24px; }
+.about-corner--br::before { bottom: 0; right: 0; }
+.about-corner--br::after  { bottom: 0; right: 0; }
+
+/* ═══ LAYOUT ═══ */
 .about-stack {
   position: relative;
 }
@@ -177,57 +270,124 @@ import Footer  from '../components/Footer.astro';
 }
 
 .about-panel__inner {
+  position: relative;
+  z-index: 3;
   width: 100%;
   max-width: 900px;
   margin: 0 auto;
-  padding: 80px 24px;
+  padding: 100px 24px;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
 }
 
-/* --- eyebrow --- */
+/* ═══ EYEBROW ═══ */
 .about-eyebrow {
   font-family: 'Michroma', monospace;
   font-size: 11px;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--red);
-  margin-bottom: 28px;
+  margin-bottom: 32px;
+  text-shadow: 0 0 20px var(--red-glow);
 }
 
-/* ═══ PANEL 1 — HERO ═══ */
+/* ═══ SECTION HEADING ═══ */
+.about-section__heading {
+  font-family: 'Michroma', monospace;
+  font-size: clamp(1.5rem, 3.5vw, 2.4rem);
+  color: var(--text);
+  margin: 0 0 48px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+.about-section__heading em {
+  color: var(--red);
+  font-style: normal;
+  text-shadow: 0 0 30px var(--red-glow);
+}
+
+/* ════════════════════════════════════
+   PANEL 1 — HERO
+   ════════════════════════════════════ */
 .about-panel--hero {
   background:
-    radial-gradient(ellipse 80% 60% at 50% 40%, rgba(220,38,38,0.06) 0%, transparent 70%),
+    radial-gradient(ellipse 90% 70% at 50% 35%, rgba(220,38,38,0.08) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 40% at 80% 80%, rgba(220,38,38,0.04) 0%, transparent 60%),
     var(--bg);
+}
+
+.about-hero__badge-top {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Michroma', monospace;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 8px 18px;
+  margin-bottom: 40px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  background: rgba(255,255,255,0.02);
+}
+.about-hero__badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--red);
+  box-shadow: 0 0 10px var(--red-glow);
+  animation: about-pulse 2s ease-in-out infinite;
 }
 
 .about-hero__heading {
   font-family: 'Michroma', monospace;
-  font-size: clamp(2rem, 5vw, 3.6rem);
-  line-height: 1.2;
+  font-size: clamp(2.2rem, 5.5vw, 4rem);
+  line-height: 1.15;
   color: var(--text);
-  margin: 0 0 24px;
+  margin: 0 0 28px;
   font-weight: 400;
+  letter-spacing: 0.01em;
 }
 .about-hero__heading em {
   color: var(--red);
   font-style: normal;
+  text-shadow: 0 0 40px var(--red-glow), 0 0 80px rgba(220,38,38,0.15);
 }
 
 .about-hero__sub {
   font-size: clamp(0.95rem, 1.6vw, 1.15rem);
-  line-height: 1.7;
+  line-height: 1.75;
   color: var(--text-muted);
-  max-width: 600px;
+  max-width: 580px;
   margin: 0;
 }
 
-.about-hero__scroll-hint {
+.about-hero__line {
+  width: 1px;
+  height: 60px;
+  background: linear-gradient(180deg, var(--red) 0%, transparent 100%);
   margin-top: 48px;
-  color: rgba(255,255,255,0.2);
+  opacity: 0.4;
+}
+
+.about-hero__scroll-hint {
+  margin-top: 16px;
+  color: rgba(255,255,255,0.18);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.about-hero__scroll-hint span {
+  font-family: 'Michroma', monospace;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
 }
 .about-dot {
   animation: about-bounce 2s ease-in-out infinite;
@@ -237,18 +397,13 @@ import Footer  from '../components/Footer.astro';
   50%      { transform: translateY(10px); opacity: 0.3; }
 }
 
-/* ═══ PANEL 2 — RULES ═══ */
+/* ════════════════════════════════════
+   PANEL 2 — RULES / CODEX
+   ════════════════════════════════════ */
 .about-panel--rules {
   background:
+    radial-gradient(ellipse 70% 50% at 20% 30%, rgba(220,38,38,0.04) 0%, transparent 60%),
     linear-gradient(180deg, var(--bg2) 0%, var(--bg) 100%);
-}
-
-.about-section__heading {
-  font-family: 'Michroma', monospace;
-  font-size: clamp(1.4rem, 3.2vw, 2.2rem);
-  color: var(--text);
-  margin: 0 0 40px;
-  font-weight: 400;
 }
 
 .about-codex {
@@ -257,138 +412,225 @@ import Footer  from '../components/Footer.astro';
   margin: 0;
   text-align: left;
   width: 100%;
-  max-width: 640px;
+  max-width: 680px;
 }
 .about-codex li {
   display: flex;
+  align-items: flex-start;
   gap: 20px;
-  padding: 24px 0;
-  border-bottom: 1px solid var(--border);
+  padding: 28px 24px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  margin-bottom: 12px;
+  background: rgba(255,255,255,0.015);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transition: border-color 0.4s, background 0.4s, transform 0.4s;
 }
-.about-codex li:last-child {
-  border-bottom: none;
+.about-codex li:hover {
+  border-color: rgba(220,38,38,0.3);
+  background: rgba(220,38,38,0.04);
+  transform: translateX(6px);
 }
 .about-codex__num {
   font-family: 'Michroma', monospace;
-  font-size: 13px;
+  font-size: 14px;
   color: var(--red);
   flex-shrink: 0;
   padding-top: 2px;
+  text-shadow: 0 0 16px var(--red-glow);
+  min-width: 24px;
+}
+.about-codex__content {
+  flex: 1;
 }
 .about-codex strong {
   display: block;
-  font-size: 1rem;
+  font-family: 'Michroma', monospace;
+  font-size: 0.9rem;
   color: var(--text);
-  margin-bottom: 6px;
+  margin-bottom: 8px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
 }
 .about-codex p {
-  font-size: 0.9rem;
-  line-height: 1.65;
+  font-size: 0.88rem;
+  line-height: 1.7;
   color: var(--text-muted);
   margin: 0;
 }
+.about-codex__glyph {
+  font-family: 'Michroma', monospace;
+  font-size: 11px;
+  color: rgba(255,255,255,0.06);
+  flex-shrink: 0;
+  padding-top: 4px;
+  transition: color 0.4s;
+}
+.about-codex li:hover .about-codex__glyph {
+  color: rgba(220,38,38,0.3);
+}
 
-/* ═══ PANEL 3 — PROCESS ═══ */
+/* ════════════════════════════════════
+   PANEL 3 — PROCESS / STEPS
+   ════════════════════════════════════ */
 .about-panel--process {
   background:
-    radial-gradient(ellipse 60% 50% at 50% 50%, rgba(220,38,38,0.04) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 50% at 50% 50%, rgba(220,38,38,0.05) 0%, transparent 70%),
     var(--bg);
 }
 
 .about-steps {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 32px;
+  gap: 20px;
   width: 100%;
   margin-top: 8px;
 }
 .about-step {
   text-align: left;
-  padding: 28px 24px;
+  padding: 32px 24px;
   border: 1px solid var(--border);
-  border-radius: 10px;
-  background: rgba(255,255,255,0.02);
-  transition: border-color 0.3s, background 0.3s;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.015);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: border-color 0.4s, background 0.4s, box-shadow 0.4s, transform 0.4s;
+  position: relative;
+}
+.about-step::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  background: repeating-linear-gradient(
+    0deg, transparent, transparent 2px,
+    rgba(0,0,0,0.06) 2px, rgba(0,0,0,0.06) 4px
+  );
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s;
 }
 .about-step:hover {
-  border-color: rgba(220,38,38,0.25);
-  background: rgba(220,38,38,0.04);
+  border-color: rgba(220,38,38,0.35);
+  background: rgba(220,38,38,0.05);
+  box-shadow: 0 0 30px rgba(220,38,38,0.08), inset 0 0 30px rgba(220,38,38,0.03);
+  transform: translateY(-4px);
+}
+.about-step:hover::before {
+  opacity: 1;
+}
+
+.about-step__head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
 }
 .about-step__icon {
   font-family: 'Michroma', monospace;
-  font-size: 12px;
+  font-size: 13px;
   color: var(--red);
-  display: block;
-  margin-bottom: 14px;
+  text-shadow: 0 0 16px var(--red-glow);
+  flex-shrink: 0;
 }
+.about-step__line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(220,38,38,0.25) 0%, transparent 100%);
+}
+
 .about-step h3 {
   font-family: 'Michroma', monospace;
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   color: var(--text);
-  margin: 0 0 8px;
+  margin: 0 0 10px;
   font-weight: 400;
+  letter-spacing: 0.02em;
 }
 .about-step p {
   font-size: 0.85rem;
-  line-height: 1.6;
+  line-height: 1.65;
   color: var(--text-muted);
   margin: 0;
 }
 
-/* ═══ PANEL 4 — STATS ═══ */
+/* ════════════════════════════════════
+   PANEL 4 — STATS
+   ════════════════════════════════════ */
 .about-panel--stats {
-  background: var(--bg2);
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 50%, rgba(220,38,38,0.06) 0%, transparent 70%),
+    var(--bg2);
 }
 
 .about-stats {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 32px;
+  gap: 24px;
   width: 100%;
-  max-width: 700px;
-  margin-bottom: 40px;
+  max-width: 760px;
+  margin-bottom: 48px;
 }
 .about-stat {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
+  padding: 36px 20px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: rgba(255,255,255,0.015);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: border-color 0.4s, box-shadow 0.4s;
+}
+.about-stat:hover {
+  border-color: rgba(220,38,38,0.3);
+  box-shadow: 0 0 30px rgba(220,38,38,0.08);
 }
 .about-stat__num {
   font-family: 'Michroma', monospace;
-  font-size: clamp(2rem, 4vw, 3rem);
+  font-size: clamp(2.2rem, 4.5vw, 3.2rem);
   color: var(--text);
   line-height: 1;
+  text-shadow: 0 0 30px rgba(255,255,255,0.06);
 }
 .about-stat__num em {
   color: var(--red);
   font-style: normal;
+  text-shadow: 0 0 20px var(--red-glow);
 }
 .about-stat__label {
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   color: var(--text-muted);
-  letter-spacing: 0.04em;
+  letter-spacing: 0.05em;
 }
 
 .about-badge {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   font-family: 'Michroma', monospace;
   font-size: 11px;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--red);
-  border: 1px solid rgba(220,38,38,0.25);
+  border: 1px solid rgba(220,38,38,0.3);
   border-radius: 999px;
-  padding: 10px 22px;
+  padding: 12px 28px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  background: rgba(220,38,38,0.04);
+  box-shadow: 0 0 30px rgba(220,38,38,0.1);
+  text-shadow: 0 0 16px var(--red-glow);
 }
 .about-badge__dot {
-  width: 6px;
-  height: 6px;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
   background: var(--red);
-  box-shadow: 0 0 8px var(--red-glow);
+  box-shadow: 0 0 12px var(--red-glow), 0 0 24px rgba(220,38,38,0.15);
   animation: about-pulse 2s ease-in-out infinite;
 }
 @keyframes about-pulse {
@@ -396,25 +638,33 @@ import Footer  from '../components/Footer.astro';
   50%      { opacity: 0.4; }
 }
 
-/* ═══ PANEL 5 — CTA ═══ */
+/* ════════════════════════════════════
+   PANEL 5 — CTA
+   ════════════════════════════════════ */
 .about-panel--cta {
   background:
-    radial-gradient(ellipse 70% 50% at 50% 60%, rgba(220,38,38,0.07) 0%, transparent 70%),
+    radial-gradient(ellipse 80% 60% at 50% 55%, rgba(220,38,38,0.09) 0%, transparent 65%),
     var(--bg);
   min-height: 70vh;
 }
 
 .about-cta__heading {
   font-family: 'Michroma', monospace;
-  font-size: clamp(1.6rem, 3.5vw, 2.6rem);
+  font-size: clamp(1.8rem, 4vw, 3rem);
   color: var(--text);
-  margin: 0 0 16px;
+  margin: 0 0 18px;
   font-weight: 400;
+  letter-spacing: 0.02em;
+}
+.about-cta__heading em {
+  color: var(--red);
+  font-style: normal;
+  text-shadow: 0 0 40px var(--red-glow);
 }
 .about-cta__sub {
-  font-size: 1rem;
+  font-size: 1.05rem;
   color: var(--text-muted);
-  margin: 0 0 36px;
+  margin: 0 0 44px;
 }
 
 .about-cta__buttons {
@@ -426,46 +676,56 @@ import Footer  from '../components/Footer.astro';
 .about-btn {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   font-family: 'Michroma', monospace;
   font-size: 12px;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   text-decoration: none;
-  padding: 14px 32px;
-  border-radius: 6px;
-  transition: all 0.3s;
+  padding: 16px 36px;
+  border-radius: 8px;
+  transition: all 0.35s;
+  position: relative;
 }
 .about-btn--wa {
   background: var(--red);
   color: #fff;
   border: 1px solid var(--red);
+  box-shadow: 0 0 24px rgba(220,38,38,0.2);
 }
 .about-btn--wa:hover {
   background: transparent;
-  box-shadow: 0 0 20px var(--red-glow);
+  box-shadow: 0 0 40px var(--red-glow), 0 0 80px rgba(220,38,38,0.12);
+  text-shadow: 0 0 12px var(--red-glow);
 }
 .about-btn--outline {
-  background: transparent;
+  background: rgba(255,255,255,0.02);
   color: var(--text);
   border: 1px solid var(--border);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 .about-btn--outline:hover {
   border-color: var(--red);
   color: var(--red);
-  box-shadow: 0 0 20px var(--red-glow);
+  box-shadow: 0 0 30px var(--red-glow);
+  text-shadow: 0 0 12px var(--red-glow);
 }
 
 /* ═══ RESPONSIVE ═══ */
 @media (max-width: 768px) {
   .about-panel__inner {
-    padding: 60px 20px;
+    padding: 70px 20px;
   }
   .about-steps {
     grid-template-columns: 1fr;
   }
   .about-stats {
     grid-template-columns: repeat(2, 1fr);
+  }
+  .about-corner { display: none; }
+  .about-hero__heading {
+    font-size: clamp(1.6rem, 7vw, 2.4rem);
   }
 }
 
