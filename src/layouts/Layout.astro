@@ -339,9 +339,22 @@ const isHomePage = Astro.url.pathname === '/';
         // Desktop: scanline sweep
         // Measure actual rendered overlay height directly
         var overlayEl = document.getElementById('pt-overlay');
-        var travel = overlayEl
-          ? overlayEl.getBoundingClientRect().height
-          : (window.innerHeight || 900) - 108;
+        var travel;
+        if (overlayEl) {
+          var rect = overlayEl.getBoundingClientRect();
+          // If height == full viewport, CSS variables not yet applied
+          if (rect.height >= window.innerHeight - 5) {
+            var topbarEl = document.querySelector('.topbar');
+            var headerEl = document.getElementById('header');
+            var headerH = (topbarEl ? topbarEl.getBoundingClientRect().height : 36)
+                        + (headerEl ? headerEl.getBoundingClientRect().height : 72);
+            travel = window.innerHeight - headerH;
+          } else {
+            travel = rect.height;
+          }
+        } else {
+          travel = window.innerHeight - 108;
+        }
         var startY   = isBack ? travel * 1.08 : -4;
         var endY     = isBack ? -4 : travel * 1.08;
         var dist     = endY - startY;
