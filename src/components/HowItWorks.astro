@@ -1,0 +1,563 @@
+---
+const bookingUrl = `https://wa.me/447575701219?text=${encodeURIComponent("Hi, I'd like to book a repair.")}`;
+const callUrl = 'tel:+447575701219';
+
+const steps = [
+  { num: '01', title: 'Book Online or Call',  desc: "WhatsApp, call, or use the booking form. Tell me what's wrong — takes 2 minutes." },
+  { num: '02', title: 'Bring Your Device',    desc: 'Drop it off at my workshop in Stanwell TW19. No queues, no waiting room — I\'m expecting you.' },
+  { num: '03', title: 'Free Diagnosis',       desc: 'I run a full diagnostic and call you with a clear quote. No work starts until you approve.' },
+  { num: '04', title: 'Repair & Test',        desc: "Fix completed, tested thoroughly. If I can't fix it — you pay nothing." },
+  { num: '05', title: 'Collect & Go',         desc: 'Pick up your device fully repaired. Same day in most cases. Job done.' },
+];
+---
+
+<section class="hiw" id="how-it-works" aria-label="How It Works">
+  <div class="hiw__top-border" aria-hidden="true"></div>
+
+  <div class="hiw__inner">
+    <header class="hiw__header">
+      <span class="hiw__eyebrow">// The process</span>
+      <h2>
+        Book it.<br />
+        Bring it in.<br />
+        Get it <em>back.</em>
+      </h2>
+      <p>Five steps. No surprises.</p>
+    </header>
+
+    <div class="hiw__layout">
+
+      <!-- ─── Left: Timeline ─────────────────────────────── -->
+      <div class="hiw__timeline">
+        {steps.map((step, idx) => (
+          <div
+            class={`hiw__step${idx === steps.length - 1 ? ' hiw__step--last' : ''}`}
+            data-step={idx}
+          >
+            <div class="hiw__num" aria-hidden="true">
+              <svg class="hiw__ring" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+                <circle class="hiw__ring-track" cx="24" cy="24" r="20" />
+                <circle class="hiw__ring-fill"  cx="24" cy="24" r="20" />
+              </svg>
+              <span class="hiw__num-label">{step.num}</span>
+            </div>
+            <div class="hiw__content">
+              <h3 class="hiw__step-title">{step.title}</h3>
+              <p class="hiw__step-desc">{step.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- ─── Right: Photo ───────────────────────────────── -->
+      <div class="hiw__photo" aria-hidden="true">
+        <span class="hiw__corner hiw__corner--tl"></span>
+        <span class="hiw__corner hiw__corner--tr"></span>
+        <span class="hiw__corner hiw__corner--bl"></span>
+        <span class="hiw__corner hiw__corner--br"></span>
+        <img
+          src="/assets/images/how-it-works.webp"
+          alt="Hardwire Core workshop — repair process"
+          loading="lazy"
+          width="420"
+          height="560"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
+        />
+        <div class="hiw__photo-fallback">// Photo coming soon</div>
+        <span class="hiw__photo-label">// Stanwell TW19 · Workshop</span>
+      </div>
+
+    </div>
+
+    <!-- ─── Bottom CTA ─────────────────────────────────── -->
+    <div class="hiw__cta">
+      <div class="hiw__cta-text">
+        <span class="hiw__cta-heading">Ready to book?</span>
+        <span class="hiw__cta-sub">Most repairs completed same day.</span>
+      </div>
+      <div class="hiw__cta-actions">
+        <a href={bookingUrl} class="hiw__btn hiw__btn--primary" target="_blank" rel="noreferrer">
+          Book Now →
+        </a>
+        <a href={callUrl} class="hiw__btn hiw__btn--outline">
+          Call Me →
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="hiw__bottom-border" aria-hidden="true"></div>
+</section>
+
+<style>
+/* ── Section shell ──────────────────────────────────────── */
+.hiw {
+  position: relative;
+  background: var(--bg);
+  overflow: hidden;
+}
+
+.hiw::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.12) 2px,
+    rgba(0, 0, 0, 0.12) 4px
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hiw__top-border {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(220, 38, 38, 0.5), transparent);
+}
+
+.hiw__bottom-border {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+}
+
+/* ── Inner ──────────────────────────────────────────────── */
+.hiw__inner {
+  position: relative;
+  z-index: 1;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 4.5rem 2.5rem 5rem;
+}
+
+/* ── Header ─────────────────────────────────────────────── */
+.hiw__header {
+  margin-bottom: 3rem;
+}
+
+.hiw__eyebrow {
+  display: block;
+  margin-bottom: 1rem;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--red);
+}
+
+.hiw__header h2 {
+  font-family: var(--font-head);
+  font-size: clamp(1.8rem, 3.2vw, 2.8rem);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  line-height: 1.15;
+  color: var(--text);
+  margin-bottom: 0.75rem;
+}
+
+.hiw__header h2 em {
+  font-style: normal;
+  color: var(--red);
+}
+
+.hiw__header p {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--text-muted);
+}
+
+/* ── Layout ─────────────────────────────────────────────── */
+.hiw__layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+@media (min-width: 1024px) {
+  .hiw__layout {
+    grid-template-columns: 1fr 420px;
+  }
+}
+
+/* ── Timeline ───────────────────────────────────────────── */
+.hiw__timeline {
+  display: flex;
+  flex-direction: column;
+}
+
+.hiw__step {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 0 1.25rem;
+  position: relative;
+  padding-bottom: 2rem;
+}
+
+.hiw__step::before {
+  content: '';
+  position: absolute;
+  left: 23px;
+  top: 48px;
+  bottom: 0;
+  width: 1px;
+  background: var(--border2);
+  transition: background 0.3s var(--ease);
+}
+
+.hiw__step--last {
+  padding-bottom: 0;
+}
+
+.hiw__step--last::before {
+  display: none;
+}
+
+/* active connector — GSAP adds .is-active */
+.hiw__step.is-active::before {
+  background: rgba(220, 38, 38, 0.4);
+}
+
+/* ── Circle ─────────────────────────────────────────────── */
+.hiw__num {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+  flex-shrink: 0;
+  pointer-events: none;
+}
+
+/* SVG ring */
+.hiw__ring {
+  position: absolute;
+  inset: 0;
+  width: 48px;
+  height: 48px;
+  transform: rotate(-90deg);
+}
+
+.hiw__ring-track {
+  stroke: rgba(220, 38, 38, 0.18);
+  stroke-width: 1.5;
+}
+
+.hiw__ring-fill {
+  stroke: #dc2626;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-dasharray: 125.66;
+  /* dashoffset set by JS only — CSS value would override GSAP attr tween */
+}
+
+/* inner dot bg */
+.hiw__num::before {
+  content: '';
+  position: absolute;
+  inset: 5px;
+  border-radius: 50%;
+  background: var(--bg3);
+  border: 1px solid rgba(220, 38, 38, 0.22);
+  transition: background 0.4s ease, border-color 0.4s ease;
+}
+
+.hiw__step.is-active .hiw__num::before {
+  background: rgba(220, 38, 38, 0.12);
+  border-color: rgba(220, 38, 38, 0.5);
+}
+
+.hiw__num-label {
+  position: relative;
+  z-index: 1;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--red);
+}
+
+/* ── Step content ───────────────────────────────────────── */
+.hiw__content {
+  padding-top: 0.7rem;
+}
+
+.hiw__step-title {
+  font-family: var(--font-head);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text);
+  margin-bottom: 0.4rem;
+  transition: color 0.3s ease;
+}
+
+.hiw__step.is-active .hiw__step-title {
+  color: #f0f0f0;
+}
+
+.hiw__step-desc {
+  font-family: var(--font-body);
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--text-muted);
+  transition: color 0.3s ease;
+}
+
+.hiw__step.is-active .hiw__step-desc {
+  color: rgba(240, 240, 240, 0.75);
+}
+
+/* ── Photo ──────────────────────────────────────────────── */
+.hiw__photo {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .hiw__photo {
+    display: block;
+    position: sticky;
+    top: calc(var(--nav-h, 64px) + var(--topbar-h, 36px) + 2rem);
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+    clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px));
+    border: 1px solid rgba(220, 38, 38, 0.2);
+    background: var(--bg3);
+  }
+}
+
+.hiw__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.85;
+  display: block;
+}
+
+.hiw__photo-fallback {
+  display: none;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  color: var(--text-muted);
+}
+
+.hiw__photo-label {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  font-family: var(--font-mono);
+  font-size: 8px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(220, 38, 38, 0.6);
+  pointer-events: none;
+}
+
+/* bracket corners */
+.hiw__corner {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.hiw__corner--tl { top: 0; left: 0;   border-top:  2px solid rgba(220,38,38,0.45); border-left: 2px solid rgba(220,38,38,0.45); }
+.hiw__corner--tr { top: 0; right: 0;  border-top:  2px solid rgba(220,38,38,0.45); border-right:2px solid rgba(220,38,38,0.45); }
+.hiw__corner--bl { bottom: 0; left: 0;  border-bottom: 2px solid rgba(220,38,38,0.45); border-left:  2px solid rgba(220,38,38,0.45); }
+.hiw__corner--br { bottom: 0; right: 0; border-bottom: 2px solid rgba(220,38,38,0.45); border-right: 2px solid rgba(220,38,38,0.45); }
+
+/* ── CTA strip ──────────────────────────────────────────── */
+.hiw__cta {
+  margin-top: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  border-top: 1px solid var(--border);
+  padding-top: 2rem;
+}
+
+.hiw__cta-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.hiw__cta-heading {
+  font-family: var(--font-head);
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text);
+}
+
+.hiw__cta-sub {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.hiw__cta-actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.hiw__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 44px;
+  padding: 0 1.5rem;
+  clip-path: var(--clip-cut);
+  font-family: var(--font-head);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  transition: background 0.2s var(--ease), color 0.2s var(--ease), border-color 0.2s var(--ease);
+}
+
+.hiw__btn--primary {
+  background: var(--red);
+  color: #fff;
+  border: 1px solid transparent;
+}
+
+.hiw__btn--primary:hover {
+  background: #b91c1c;
+}
+
+.hiw__btn--outline {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--border2);
+}
+
+.hiw__btn--outline:hover {
+  border-color: var(--red);
+  color: var(--red);
+}
+
+/* ── Mobile ─────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .hiw__inner {
+    padding: 3rem 1rem 4rem;
+  }
+
+  .hiw__header h2 {
+    font-size: clamp(1.6rem, 7vw, 2.2rem);
+  }
+
+  .hiw__cta {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hiw__cta-actions {
+    flex-direction: column;
+  }
+
+  .hiw__btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* ── Step — no mouse interaction ───────────────────────── */
+.hiw__step {
+  pointer-events: none;
+}
+
+/* ── Reduced motion — show all arcs drawn, no animation ─── */
+@media (prefers-reduced-motion: reduce) {
+  .hiw__ring-fill {
+    stroke-dashoffset: 0;
+  }
+}
+</style>
+
+<script>
+import gsap from 'gsap';
+
+const CIRCUMFERENCE = 2 * Math.PI * 20; // ≈ 125.66
+const HOLD  = 1.6;
+const DRAW  = 0.55;
+const ERASE = 0.35;
+const GAP   = 0.08;
+
+// Track running tweens so we can kill them on navigation
+let hiwCtx: gsap.Context | null = null;
+
+function initStepper() {
+  // Only run on pages that have the component
+  const steps = Array.from(document.querySelectorAll<HTMLElement>('.hiw__step'));
+  const fills = Array.from(document.querySelectorAll<SVGCircleElement>('.hiw__ring-fill'));
+  if (!steps.length) return;
+
+  // Kill any previous GSAP context from last visit
+  hiwCtx?.revert();
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    steps[0].classList.add('is-active');
+    return;
+  }
+
+  // Wrap everything in a GSAP context so we can cleanly kill it later
+  hiwCtx = gsap.context(() => {
+    // Set via CSS property (not attr) so GSAP can tween it correctly
+    gsap.set(fills, { strokeDashoffset: CIRCUMFERENCE });
+
+    let current = 0;
+
+    function animateStep(idx: number): void {
+      const step = steps[idx];
+      const fill = fills[idx];
+      if (!step || !fill) return;
+
+      step.classList.add('is-active');
+
+      gsap.to(fill, {
+        strokeDashoffset: 0,
+        duration: DRAW,
+        ease: 'power2.out',
+        onComplete() {
+          gsap.delayedCall(HOLD, () => {
+            gsap.to(fill, {
+              strokeDashoffset: CIRCUMFERENCE,
+              duration: ERASE,
+              ease: 'power2.in',
+              onStart() {
+                step.classList.remove('is-active');
+              },
+              onComplete() {
+                current = (current + 1) % steps.length;
+                gsap.delayedCall(GAP, () => animateStep(current));
+              },
+            });
+          });
+        },
+      });
+    }
+
+    animateStep(0);
+  });
+}
+
+// Run on first load AND after every ClientRouter navigation
+document.addEventListener('astro:page-load', initStepper);
+
+// Kill stepper tweens when navigating away
+document.addEventListener('astro:before-preparation', () => {
+  hiwCtx?.revert();
+  hiwCtx = null;
+});
+</script>

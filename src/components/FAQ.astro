@@ -383,6 +383,7 @@ const faqSchema = JSON.stringify({
     root.dataset.faqInit = '1';
 
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const isMobile = window.matchMedia('(max-width: 992px)').matches;
     const header = document.querySelector<HTMLElement>('.faq__left');
     const entries = root.querySelectorAll<HTMLElement>('.faq__entry');
     const items = root.querySelectorAll<HTMLButtonElement>('.faq__item');
@@ -427,7 +428,7 @@ const faqSchema = JSON.stringify({
 
     if (!header) return;
 
-    if (reduceMotion) {
+    if (reduceMotion || isMobile) {
       header.classList.add('in-view');
       root.classList.add('in-view');
       return;

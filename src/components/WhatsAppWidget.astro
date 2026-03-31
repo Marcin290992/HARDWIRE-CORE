@@ -1,0 +1,256 @@
+---
+---
+
+<div id="wa-widget">
+  <div id="wa-popup" aria-hidden="true">
+    <div class="wa-popup__redline"></div>
+    <div class="wa-popup__header">
+      <div class="wa-popup__avatar">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="white" aria-hidden="true">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+          <path d="M12 0C5.373 0 0 5.373 0 12c0 2.136.564 4.14 1.543 5.876L0 24l6.324-1.525A11.952 11.952 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.885 0-3.65-.52-5.163-1.426L3.6 21.6l1.05-3.148A9.956 9.956 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+        </svg>
+      </div>
+      <div class="wa-popup__info">
+        <span class="wa-popup__name">Hardwire Core</span>
+        <span class="wa-popup__status">Usually replies in minutes</span>
+      </div>
+      <button class="wa-popup__close" id="waClose" aria-label="Close">✕</button>
+    </div>
+
+    <div class="wa-popup__body">
+      <div class="wa-popup__bubble">
+        👋 Hi! Describe your issue and I'll get back to you as soon as possible.
+      </div>
+      <textarea id="waMsg" class="wa-popup__textarea" placeholder="e.g. My laptop won't turn on..." rows="3"></textarea>
+      <button class="wa-popup__send" id="waSend">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="white" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.136.564 4.14 1.543 5.876L0 24l6.324-1.525A11.952 11.952 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.885 0-3.65-.52-5.163-1.426L3.6 21.6l1.05-3.148A9.956 9.956 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+        Start Chat on WhatsApp
+      </button>
+    </div>
+  </div>
+
+  <button class="wa-fab" id="waFab" aria-label="Chat on WhatsApp">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="white" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.136.564 4.14 1.543 5.876L0 24l6.324-1.525A11.952 11.952 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.885 0-3.65-.52-5.163-1.426L3.6 21.6l1.05-3.148A9.956 9.956 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+  </button>
+</div>
+
+<style>
+#wa-widget {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 9000;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+}
+
+#wa-popup {
+  display: none;
+  flex-direction: column;
+  width: 300px;
+  background: var(--bg);
+  border: 1px solid var(--red-border);
+  clip-path: var(--clip-cut);
+  overflow: hidden;
+}
+
+#wa-popup.is-open {
+  display: flex;
+}
+
+.wa-popup__redline {
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--red), transparent);
+  flex-shrink: 0;
+}
+
+.wa-popup__header {
+  background: var(--bg3);
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+.wa-popup__avatar {
+  width: 32px;
+  height: 32px;
+  clip-path: var(--clip-cut);
+  background: rgba(220, 38, 38, 0.12);
+  border: 1px solid var(--red-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.wa-popup__info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+
+.wa-popup__name {
+  font-family: var(--font-head);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text);
+}
+
+.wa-popup__status {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--red);
+  letter-spacing: 0.06em;
+}
+
+.wa-popup__close {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  font-size: 16px;
+  padding: 0;
+  line-height: 1;
+  flex-shrink: 0;
+  transition: color 0.2s;
+}
+
+.wa-popup__close:hover {
+  color: var(--red);
+}
+
+.wa-popup__body {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.wa-popup__bubble {
+  background: rgba(220, 38, 38, 0.05);
+  border: 1px solid var(--red-border);
+  padding: 0.65rem 0.85rem;
+  font-family: var(--font-body);
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--text-mid);
+}
+
+.wa-popup__textarea {
+  width: 100%;
+  box-sizing: border-box;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  padding: 0.65rem;
+  resize: none;
+  outline: none;
+  line-height: 1.6;
+  transition: border-color 0.2s;
+}
+
+.wa-popup__textarea:focus {
+  border-color: var(--red-border);
+}
+
+.wa-popup__send {
+  width: 100%;
+  height: 42px;
+  background: var(--red);
+  border: none;
+  color: #fff;
+  font-family: var(--font-head);
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  clip-path: var(--clip-cut);
+  transition: opacity 0.2s;
+}
+
+.wa-popup__send:hover {
+  opacity: 0.85;
+}
+
+.wa-fab {
+  width: 52px;
+  height: 52px;
+  clip-path: var(--clip-cut);
+  background: var(--red);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s, transform 0.2s;
+  box-shadow: 0 4px 20px rgba(220, 38, 38, 0.35);
+}
+
+.wa-fab:hover {
+  opacity: 0.85;
+  transform: scale(1.05);
+}
+
+@media (max-width: 480px) {
+  #wa-widget {
+    bottom: 16px;
+    right: 16px;
+  }
+
+  #wa-popup {
+    width: calc(100vw - 32px);
+    max-width: 300px;
+  }
+
+  .wa-fab {
+    width: 46px;
+    height: 46px;
+  }
+}
+</style>
+
+<script>
+  function initWaWidget() {
+    const fab = document.getElementById('waFab');
+    const popup = document.getElementById('wa-popup');
+    const closeBtn = document.getElementById('waClose');
+    const sendBtn = document.getElementById('waSend');
+    const msgInput = document.getElementById('waMsg');
+
+    if (!fab || !popup) return;
+
+    fab.addEventListener('click', () => {
+      popup.classList.toggle('is-open');
+    });
+
+    closeBtn?.addEventListener('click', () => {
+      popup.classList.remove('is-open');
+    });
+
+    sendBtn?.addEventListener('click', () => {
+      const msg = (msgInput as HTMLTextAreaElement)?.value?.trim();
+      const text = msg || "Hi, I'd like to get a repair quote.";
+      window.open('https://wa.me/447575701219?text=' + encodeURIComponent(text), '_blank');
+    });
+  }
+
+  document.addEventListener('astro:page-load', initWaWidget);
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') document.getElementById('wa-popup')?.classList.remove('is-open');
+  });
+</script>

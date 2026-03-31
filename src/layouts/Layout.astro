@@ -1,6 +1,8 @@
 ---
 import '../styles/global.css';
 import '../styles/hardwire.css';
+import { ClientRouter } from 'astro:transitions';
+import WhatsAppWidget from '../components/WhatsAppWidget.astro';
 
 interface Props {
   title?: string;
@@ -11,41 +13,406 @@ const {
   title = 'Hardwire Core',
   description = 'Professional computer repair services in Stanwell TW19.',
 } = Astro.props;
+
+const isHomePage = Astro.url.pathname === '/';
 ---
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="theme-color" content="#080808" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<link rel="preload" href="/fonts/exo2-400.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
-		<link rel="preload" href="/fonts/michroma-400.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
-		<link rel="preload" href="/fonts/ibmplexmono-400.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
-		<meta name="description" content={description} />
-		<meta name="generator" content={Astro.generator} />
-		<style is:inline>
-			:root {
-				color-scheme: dark;
-			}
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="theme-color" content="#080808" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="preload" href="/fonts/michroma-400.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+    <link rel="preload" href="/fonts/exo2-300.woff2"    as="font" type="font/woff2" crossorigin="anonymous" />
+    <link rel="preload" href="/fonts/exo2-400.woff2"    as="font" type="font/woff2" crossorigin="anonymous" />
+    <link rel="preload" href="/fonts/exo2-600.woff2"    as="font" type="font/woff2" crossorigin="anonymous" />
+    <link rel="preload" href="/fonts/exo2-700.woff2"    as="font" type="font/woff2" crossorigin="anonymous" />
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
 
-			html,
-			body {
-				min-height: 100%;
-				margin: 0;
-				background: #0f0f0f;
-				color: #f0f0f0;
-			}
+    <style is:inline>
+      /* ── Fonts (inlined — survive ClientRouter swaps) ──────── */
+      @font-face { font-family: 'Michroma'; src: url('/fonts/michroma-400.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: optional; }
+      @font-face { font-family: 'Exo 2';   src: url('/fonts/exo2-300.woff2')    format('woff2'); font-weight: 300; font-style: normal; font-display: optional; }
+      @font-face { font-family: 'Exo 2';   src: url('/fonts/exo2-400.woff2')    format('woff2'); font-weight: 400; font-style: normal; font-display: optional; }
+      @font-face { font-family: 'Exo 2';   src: url('/fonts/exo2-600.woff2')    format('woff2'); font-weight: 600; font-style: normal; font-display: optional; }
+      @font-face { font-family: 'Exo 2';   src: url('/fonts/exo2-700.woff2')    format('woff2'); font-weight: 700; font-style: normal; font-display: optional; }
 
-			body {
-				font-family: 'Exo 2', system-ui, sans-serif;
-			}
-		</style>
-		<title>{title}</title>
-	</head>
-	<body>
-		<slot />
-	</body>
+      /* ── Base ───────────────────────────────────────────────── */
+      :root { color-scheme: dark; }
+
+      html, body { min-height: 100%; margin: 0; background: #0f0f0f; color: #f0f0f0; }
+      body { font-family: 'Exo 2', system-ui, sans-serif; font-synthesis: none; }
+
+      /* ── Mobile fade-in animation ───────────────────────────── */
+      @keyframes hw-mobile-fade-in {
+        from { opacity: 0; }
+        to   { opacity: 1; }
+      }
+      html.hw-mobile-fade-enter body {
+        animation: hw-mobile-fade-in 220ms cubic-bezier(0.4, 0, 0.2, 1) both;
+      }
+
+      /* ── Atmosphere grain ───────────────────────────────────── */
+      #atmo-grain {
+        position: fixed; inset: 0; z-index: 40;
+        pointer-events: none; opacity: 0.06;
+        background-image:
+          radial-gradient(rgba(255,255,255,0.16) 0.6px, transparent 0.6px),
+          radial-gradient(rgba(0,0,0,0.2) 0.7px, transparent 0.7px);
+        background-size: 3px 3px, 5px 5px;
+        background-position: 0 0, 1px 1px;
+        mix-blend-mode: soft-light;
+      }
+
+      /* ── Scroll reveal ──────────────────────────────────────── */
+      .hw-scroll-reveal {
+        opacity: 0;
+        transform: translate3d(0, 18px, 0);
+        transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+                    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      .hw-scroll-reveal.is-inview { opacity: 1; transform: translate3d(0, 0, 0); }
+      @media (prefers-reduced-motion: reduce) {
+        .hw-scroll-reveal { opacity: 1; transform: none; transition: none; }
+      }
+      @media (max-width: 992px) {
+        .hw-scroll-reveal { opacity: 1; transform: none; transition: none; }
+      }
+
+      /* ── Page-transition overlay ────────────────────────────── */
+      #pt-overlay {
+        position: fixed; inset: 0; z-index: 10000;
+        background: #080808; pointer-events: none;
+        opacity: 0; will-change: opacity;
+      }
+      @media (min-width: 993px) {
+        #pt-overlay { top: calc(var(--topbar-h) + var(--nav-h)); }
+      }
+      #pt-line {
+        position: absolute; left: 0; right: 0; height: 2px;
+        background: linear-gradient(90deg, transparent 0%, #dc2626 20%, #ff3333 50%, #dc2626 80%, transparent 100%);
+        box-shadow: 0 0 14px rgba(220,38,38,0.9), 0 0 40px rgba(220,38,38,0.35);
+        transform: translateY(-4px); will-change: transform;
+      }
+      #pt-trail {
+        position: absolute; left: 0; right: 0; height: 16px;
+        background: linear-gradient(90deg, transparent 0%, rgba(220,38,38,0.1) 18%, rgba(255,50,50,0.45) 50%, rgba(220,38,38,0.1) 82%, transparent 100%);
+        opacity: 0; transform: translateY(-12px); will-change: transform, opacity;
+      }
+      @media (min-width: 993px) { #pt-trail { filter: blur(10px); } }
+    </style>
+
+    <!-- Runs before first paint: applies mobile fade-in class if needed -->
+    <script is:inline>
+      (function () {
+        try {
+          if (sessionStorage.getItem('__hwMobileNavFade') !== '1') return;
+          sessionStorage.removeItem('__hwMobileNavFade');
+          if (!window.matchMedia('(max-width: 992px)').matches) return;
+          document.documentElement.classList.add('hw-mobile-fade-enter');
+          setTimeout(function () { document.documentElement.classList.remove('hw-mobile-fade-enter'); }, 320);
+        } catch (_) {}
+      }());
+    </script>
+
+    <title>{title}</title>
+    <ClientRouter />
+  </head>
+
+  <body class:list={[isHomePage ? 'page-home' : 'page-subpage']}>
+    <!--
+      NO transition:persist here.
+      The pt script re-captures DOM refs after every swap and immediately
+      re-applies the current animation state, preventing any opacity flash.
+    -->
+    <div id="pt-overlay" aria-hidden="true">
+      <div id="pt-trail"></div>
+      <div id="pt-line"></div>
+    </div>
+    <div id="atmo-grain" aria-hidden="true"></div>
+
+    <slot />
+
+    <script src="/scripts/menu.js" defer></script>
+
+    <script is:inline>
+      window.__hwNavigate = function (href) {
+        var a = document.createElement('a');
+        a.href = href;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      };
+    </script>
+
+    <!-- ── Scroll reveal ─────────────────────────────────────── -->
+    <script is:inline>
+    (function () {
+      function init() {
+        var main = document.querySelector('main');
+        if (!main) return;
+        var sections = Array.prototype.slice.call(main.querySelectorAll(':scope > section'));
+        if (!sections.length) return;
+
+        var isMobile     = window.matchMedia('(max-width: 992px)').matches;
+        var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        // First section always visible
+        sections[0].classList.remove('hw-scroll-reveal');
+        sections[0].classList.add('is-inview');
+
+        for (var i = 1; i < sections.length; i++) sections[i].classList.add('hw-scroll-reveal');
+
+        if (isMobile || reduceMotion) {
+          for (var j = 0; j < sections.length; j++) sections[j].classList.add('is-inview');
+          return;
+        }
+
+        var obs = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (!e.isIntersecting) return;
+            e.target.classList.add('is-inview');
+            obs.unobserve(e.target);
+          });
+        }, { threshold: 0.14, rootMargin: '0px 0px -8% 0px' });
+
+        for (var n = 1; n < sections.length; n++) obs.observe(sections[n]);
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init, { once: true });
+      } else {
+        init();
+      }
+      document.addEventListener('astro:page-load', init);
+    }());
+    </script>
+
+    <!-- ── Page transition ──────────────────────────────────── -->
+    <script is:inline>
+    (function () {
+      if (window.__ptReady) return;
+      window.__ptReady = true;
+
+      // ── Timing ──────────────────────────────────────────────
+      var FADE_IN    = 80;   // ms — overlay blacks out
+      var SCAN       = 320;  // ms — scanline travels full height
+      var FADE_OUT   = 240;  // ms — overlay lifts, new page revealed
+      var TRAIL_FADE = 160;  // ms — glow trail decay
+      var JITTER_MS  = 95;   // ms — electrical jitter on scan start
+
+      // ── State ────────────────────────────────────────────────
+      var raf          = 0;
+      var swapDone     = false;
+      var outDone      = false;
+      var navDirection = 'forward';
+      var isHistoryNav = false;
+
+      // Rendered values — preserved across DOM swaps
+      var sOverlay = 0;
+      var sLineY   = -4;
+      var sLineX   = 0;
+      var sTrail   = 0;
+
+      // ── DOM refs — refreshed after every swap ────────────────
+      var el = {};
+      function captureRefs() {
+        el.overlay = document.getElementById('pt-overlay');
+        el.line    = document.getElementById('pt-line');
+        el.trail   = document.getElementById('pt-trail');
+      }
+      captureRefs();
+
+      // Called immediately after captureRefs() so the new overlay
+      // never shows a stale opacity:0 frame before we set it.
+      function applyState() {
+        if (!el.overlay) return;
+        el.overlay.style.opacity = String(sOverlay);
+        el.line.style.opacity    = '1';
+        el.trail.style.opacity   = String(sTrail);
+        el.line.style.transform  = 'translate3d(' + sLineX + 'px,' + sLineY + 'px,0)';
+        el.trail.style.transform = 'translate3d(' + (sLineX * 0.6) + 'px,' + (sLineY - 8) + 'px,0)';
+      }
+
+      // ── Setters (update state + DOM together) ────────────────
+      function setOverlay(v) {
+        sOverlay = v;
+        if (el.overlay) el.overlay.style.opacity = String(v);
+      }
+      function setScan(y, x) {
+        sLineY = y; sLineX = x;
+        if (el.line)  el.line.style.transform  = 'translate3d(' + x + 'px,' + y + 'px,0)';
+        if (el.trail) el.trail.style.transform = 'translate3d(' + (x * 0.6) + 'px,' + (y - 8) + 'px,0)';
+      }
+      function setTrail(v) {
+        sTrail = v;
+        if (el.trail) el.trail.style.opacity = String(v);
+      }
+
+      // ── Easing ───────────────────────────────────────────────
+      function ease(t)   { return t < 0.5 ? 2*t*t : -1+(4-2*t)*t; }
+      function inExpo(t) { return t === 0 ? 0 : Math.pow(2, 10*(t-1)); }
+      function stop()    { if (raf) { cancelAnimationFrame(raf); raf = 0; } }
+
+      // ── History direction tracking ───────────────────────────
+      var seq     = Number(sessionStorage.getItem('__ptSeq') || '0');
+      var lastIdx = (history.state && typeof history.state.__ptIdx === 'number')
+                    ? history.state.__ptIdx : seq;
+      if (!history.state || history.state.__ptIdx == null) {
+        try { history.replaceState(Object.assign({}, history.state || {}, { __ptIdx: seq }), ''); } catch (_) {}
+      }
+      sessionStorage.setItem('__ptSeq', String(seq));
+
+      window.addEventListener('popstate', function (ev) {
+        isHistoryNav = true;
+        var idx = ev.state && typeof ev.state.__ptIdx === 'number' ? ev.state.__ptIdx : null;
+        navDirection = (idx != null && idx >= lastIdx) ? 'forward' : 'back';
+        if (idx != null) lastIdx = idx;
+      }, true);
+
+      document.addEventListener('click', function (ev) {
+        var a = ev.target && ev.target.closest && ev.target.closest('a[href]');
+        if (!a) return;
+        var href = a.getAttribute('href') || '';
+        if (!href || href[0] === '#' || href.startsWith('mailto:') || href.startsWith('tel:')) return;
+        if (a.target === '_blank' || a.hasAttribute('download')) return;
+        if (ev.defaultPrevented || ev.button !== 0 || ev.metaKey || ev.ctrlKey || ev.shiftKey || ev.altKey) return;
+        try {
+          if (new URL(a.href, location.href).origin === location.origin) {
+            navDirection = 'forward';
+            isHistoryNav = false;
+          }
+        } catch (_) {}
+      }, true);
+
+      // ── Reveal: fade overlay out after swap ──────────────────
+      function tryReveal() {
+        if (!swapDone || !outDone) return;
+        stop();
+        setScan(-4, 0);
+        setTrail(0);
+        var start = performance.now();
+        (function tick(now) {
+          var t = Math.min((now - start) / FADE_OUT, 1);
+          setOverlay(1 - ease(t));
+          if (t < 1) {
+            raf = requestAnimationFrame(tick);
+          } else {
+            setOverlay(0);
+            swapDone = false;
+            outDone  = false;
+          }
+        }(performance.now()));
+      }
+
+      // ── Out animation: before page swap ─────────────────────
+      function animOut(ev) {
+        stop();
+        swapDone = false;
+        outDone  = false;
+
+        var dir     = (ev && ev.detail && ev.detail.direction) || navDirection;
+        var isBack  = dir === 'back';
+        var desktop = window.innerWidth > 992;
+
+        if (!desktop) {
+          // Mobile: simple fade to black
+          setOverlay(0);
+          var mStart = performance.now();
+          (function mobileTick(now) {
+            var e = now - mStart;
+            setOverlay(Math.min(e / FADE_IN, 1));
+            if (e < FADE_IN + SCAN) {
+              raf = requestAnimationFrame(mobileTick);
+            } else {
+              outDone = true;
+              tryReveal();
+            }
+          }(performance.now()));
+          return;
+        }
+
+        // Desktop: scanline sweep
+        // Measure actual rendered overlay height directly
+        var overlayEl = document.getElementById('pt-overlay');
+        var travel = overlayEl
+          ? overlayEl.getBoundingClientRect().height
+          : (window.innerHeight || 900) - 108;
+        var startY   = isBack ? travel * 1.08 : -4;
+        var endY     = isBack ? -4 : travel * 1.08;
+        var dist     = endY - startY;
+        var scanOff  = FADE_IN * 0.45;
+
+        setOverlay(0);
+        setScan(startY, 0);
+        setTrail(0);
+
+        var start = performance.now();
+        (function tick(now) {
+          var e      = now - start;
+          var scanT  = Math.min(Math.max(0, e - scanOff) / SCAN, 1);
+          var jitter = (1 - Math.min(e / JITTER_MS, 1)) * Math.sin(e * 0.45) * 5;
+
+          setOverlay(Math.min(e / FADE_IN, 1));
+          setScan(startY + dist * ease(scanT), jitter);
+
+          if (scanT > 0) {
+            var tf = Math.min(Math.max(0, e - scanOff) / TRAIL_FADE, 1);
+            setTrail(0.82 * (1 - inExpo(tf)));
+          }
+
+          if (e < FADE_IN + SCAN) {
+            raf = requestAnimationFrame(tick);
+          } else {
+            setTrail(0);
+            setScan(endY, 0);
+            outDone = true;
+            tryReveal();
+          }
+        }(performance.now()));
+      }
+
+      // ── Mobile fade-in after swap ────────────────────────────
+      function triggerMobileFade() {
+        if (!window.matchMedia('(max-width: 992px)').matches) return;
+        document.documentElement.classList.remove('hw-mobile-fade-enter');
+        requestAnimationFrame(function () {
+          document.documentElement.classList.add('hw-mobile-fade-enter');
+          setTimeout(function () { document.documentElement.classList.remove('hw-mobile-fade-enter'); }, 320);
+        });
+      }
+
+      // ── Astro hooks ──────────────────────────────────────────
+      document.addEventListener('astro:before-preparation', animOut);
+
+      document.addEventListener('astro:after-swap', function () {
+        // Re-capture refs to the freshly swapped-in DOM elements, then
+        // immediately apply the current animation state (synchronously,
+        // before the browser can paint the new overlay at opacity:0).
+        captureRefs();
+        applyState();
+
+        if (!isHistoryNav) {
+          seq += 1;
+          try {
+            history.replaceState(Object.assign({}, history.state || {}, { __ptIdx: seq }), '');
+            lastIdx = seq;
+          } catch (_) {}
+          sessionStorage.setItem('__ptSeq', String(seq));
+        }
+        isHistoryNav = false;
+
+        triggerMobileFade();
+        swapDone = true;
+        tryReveal();
+      });
+    }());
+    </script>
+
+    <WhatsAppWidget />
+  </body>
 </html>

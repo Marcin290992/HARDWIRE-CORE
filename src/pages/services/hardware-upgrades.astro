@@ -1,0 +1,17 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import SiteMenu from '../../components/SiteMenu.astro';
+import Footer from '../../components/Footer.astro';
+import ServiceDetailContent from '../../components/ServiceDetailContent.astro';
+import { serviceDetails } from '../../data/serviceDetails';
+
+const service = serviceDetails['hardware-upgrades'];
+---
+
+<Layout title={`${service.title} | Hardwire Core`} description={service.description}>
+  <SiteMenu />
+  <main>
+    <ServiceDetailContent service={service} />
+  </main>
+  <Footer />
+</Layout>

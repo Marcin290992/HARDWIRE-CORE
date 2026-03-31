@@ -1,0 +1,612 @@
+---
+import type { ServiceDetail } from '../data/serviceDetails';
+import { serviceTitles } from '../data/serviceDetails';
+
+interface Props {
+  service: ServiceDetail;
+}
+
+const { service } = Astro.props;
+
+const bookingHref = `https://wa.me/447575701219?text=${encodeURIComponent(`Hi, I'd like to book ${service.title}.`)}`;
+const relatedSlugs = service.related.filter((slug) => slug !== service.slug && serviceTitles[slug]).slice(0, 4);
+const firstSectionParagraph = service.sections[0]?.paragraphs[0];
+const explainHeading = service.whatIsIt?.heading ?? `What Is ${service.title}?`;
+const explainParagraphs =
+  service.whatIsIt?.paragraphs ??
+  [
+    `${service.title} is a focused service designed to solve a specific fault safely and without replacing parts that are still healthy.`,
+    firstSectionParagraph ??
+      'Work starts with diagnosis, followed by a clear recommendation and only then the repair or setup itself.',
+    `Typical turnaround is ${service.time.toLowerCase()} with pricing ${service.price.toLowerCase()}, always under a no-fix-no-fee approach.`,
+  ];
+const explainChecklist =
+  service.whatIsIt?.checklist ??
+  [
+    'You are seeing clear symptoms and want a targeted fix.',
+    'You want diagnosis before paying for unnecessary work.',
+    'You prefer plain-English explanation of options and risks.',
+  ];
+---
+
+<section class="svc__breadcrumb-wrap" aria-label="Breadcrumb">
+  <div class="svc__breadcrumb">
+    <a href="/services/">Services</a>
+    <span class="svc__sep">//</span>
+    <span>{service.title}</span>
+  </div>
+</section>
+
+<section class="svc__hero" aria-label="Service hero">
+  <div class="svc__hero-inner">
+    <div class="svc__hero-left">
+      <span class="svc__eyebrow">// Service</span>
+      <h1>{service.title}</h1>
+      <p>{service.lead}</p>
+    </div>
+
+    <aside class="svc__meta" aria-label="Service meta">
+      <div class="svc__meta-row">
+        <span class="svc__meta-label">Time</span>
+        <span class="svc__meta-value">{service.time}</span>
+      </div>
+      <div class="svc__meta-row">
+        <span class="svc__meta-label">Price</span>
+        <span class="svc__meta-value">{service.price}</span>
+      </div>
+      <div class="svc__meta-row">
+        <span class="svc__meta-label">Guarantee</span>
+        <span class="svc__meta-value">{service.guarantee}</span>
+      </div>
+      <a href={bookingHref} class="svc__meta-cta" target="_blank" rel="noreferrer">Book This Service</a>
+    </aside>
+  </div>
+</section>
+
+{service.extended && (
+  <section class="svc__extended" aria-label="Service details explained">
+    <div class="svc__ext-inner">
+      <div class="svc__ext-block">
+        <h2>What Is This Service?</h2>
+        {service.extended.whatIs.map((p) => <p>{p}</p>)}
+      </div>
+      <div class="svc__ext-block">
+        <h2>How It Works</h2>
+        {service.extended.howItWorks.map((p) => <p>{p}</p>)}
+      </div>
+      <div class="svc__ext-block">
+        <h2>When Do You Need It?</h2>
+        {service.extended.whenYouNeedIt.map((p) => <p>{p}</p>)}
+      </div>
+      <div class="svc__ext-faq">
+        <h2>Common Questions</h2>
+        {service.extended.faq.map((item) => (
+          <details class="svc__faq-item">
+            <summary class="svc__faq-q">{item.q}</summary>
+            <div class="svc__faq-a">{item.a}</div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+)}
+
+<section class="svc__body" aria-label="Service details">
+  <div class="svc__body-inner">
+    <div class="svc__main">
+      <article class="svc__section svc__section--intro">
+        <h2>{explainHeading}</h2>
+        {explainParagraphs.map((paragraph) => (
+          <p>{paragraph}</p>
+        ))}
+        <ul class="svc__list svc__intro-list">
+          {explainChecklist.map((item) => (
+            <li>{item}</li>
+          ))}
+        </ul>
+      </article>
+
+      {service.sections.map((section) => (
+        <article class="svc__section">
+          <h2>{section.heading}</h2>
+          {section.paragraphs.map((paragraph) => (
+            <p>{paragraph}</p>
+          ))}
+          {section.list && (
+            <ul class="svc__list">
+              {section.list.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          )}
+          {section.highlight && <div class="svc__highlight">{section.highlight}</div>}
+        </article>
+      ))}
+    </div>
+
+    <aside class="svc__sidebar">
+      <div class="svc__related">
+        <span class="svc__related-label">// Related services</span>
+        <ul>
+          {relatedSlugs.map((slug) => (
+            <li>
+              <a href={`/services/${slug}/`}>
+                <span>{serviceTitles[slug]}</span>
+                <span class="svc__related-arrow">-&gt;</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="svc__help">
+        <h3>Not sure what you need?</h3>
+        <p>Send a quick message with your symptoms and I will point you to the right service before you book.</p>
+        <a href="https://wa.me/447575701219?text=Hi, I am not sure which service I need." target="_blank" rel="noreferrer">WhatsApp Support</a>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<style>
+.svc__breadcrumb-wrap {
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+}
+
+.svc__breadcrumb {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0.75rem 2.5rem;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.svc__breadcrumb a {
+  color: var(--text-muted);
+}
+
+.svc__breadcrumb a:hover {
+  color: var(--red);
+}
+
+.svc__sep {
+  margin: 0 0.55rem;
+  color: var(--red);
+}
+
+.svc__hero {
+  position: relative;
+  background: var(--bg);
+  overflow: hidden;
+}
+
+.svc__hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 0, 0, 0.12) 2px, rgba(0, 0, 0, 0.12) 4px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.svc__hero-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 3rem 2.5rem 2.5rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .svc__hero-inner {
+    grid-template-columns: minmax(0, 1fr) 340px;
+    gap: 2rem;
+  }
+}
+
+.svc__eyebrow {
+  display: block;
+  margin-bottom: 1rem;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--red);
+}
+
+.svc__hero h1 {
+  font-family: var(--font-head);
+  font-size: clamp(1.4rem, 5vw, 3.5rem);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  line-height: 1.08;
+  color: var(--text);
+  margin-bottom: 0.9rem;
+}
+
+.svc__hero p {
+  max-width: 52ch;
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: var(--text-mid);
+}
+
+.svc__meta {
+  border: 1px solid var(--red-border);
+  background: var(--bg3);
+  clip-path: var(--clip-cut);
+  padding: 1.5rem;
+  align-self: start;
+}
+
+.svc__meta-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 0.7rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.svc__meta-row:last-of-type {
+  margin-bottom: 1rem;
+}
+
+.svc__meta-label {
+  font-family: var(--font-mono);
+  font-size: 8px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--red);
+}
+
+.svc__meta-value {
+  font-family: var(--font-head);
+  font-size: 14px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text);
+}
+
+.svc__meta-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 44px;
+  background: var(--red);
+  clip-path: var(--clip-cut);
+  font-family: var(--font-head);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #fff;
+  transition: background 0.2s var(--ease);
+}
+
+.svc__meta-cta:hover {
+  background: var(--red-dark);
+}
+
+.svc__body {
+  background: var(--bg);
+}
+
+.svc__body-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 3rem 2.5rem 5rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@media (min-width: 1024px) {
+  .svc__body-inner {
+    grid-template-columns: minmax(0, 65%) minmax(280px, 35%);
+    gap: 2rem;
+  }
+}
+
+.svc__main {
+  display: flex;
+  flex-direction: column;
+  gap: 1.8rem;
+}
+
+.svc__section h2 {
+  margin-bottom: 0.9rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid rgba(220, 38, 38, 0.2);
+  font-family: var(--font-head);
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--red);
+}
+
+.svc__section p {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  line-height: 1.75;
+  color: var(--text-muted);
+  margin-bottom: 0.75rem;
+}
+
+.svc__section--intro {
+  border: 1px solid var(--border);
+  background: var(--bg2);
+  clip-path: var(--clip-cut);
+  padding: 1.2rem 1.2rem 1rem;
+}
+
+.svc__section--intro h2 {
+  border-bottom-color: rgba(220, 38, 38, 0.35);
+}
+
+.svc__intro-list {
+  margin-top: 0.9rem;
+}
+
+.svc__list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin: 0.7rem 0 0;
+}
+
+.svc__list li {
+  position: relative;
+  padding-left: 1rem;
+  font-family: var(--font-body);
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--text-mid);
+}
+
+.svc__list li::before {
+  content: '->';
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--red);
+  font-family: var(--font-mono);
+  font-size: 10px;
+}
+
+.svc__highlight {
+  margin-top: 0.9rem;
+  border-left: 3px solid var(--red);
+  background: rgba(220, 38, 38, 0.05);
+  padding: 1rem 1.25rem;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: var(--text-mid);
+}
+
+.svc__sidebar {
+  align-self: start;
+}
+
+@media (min-width: 1024px) {
+  .svc__sidebar {
+    position: sticky;
+    top: calc(var(--nav-h) + var(--topbar-h) + 1.5rem);
+  }
+}
+
+.svc__related {
+  margin-bottom: 1rem;
+}
+
+.svc__related-label {
+  display: block;
+  margin-bottom: 0.6rem;
+  font-family: var(--font-mono);
+  font-size: 8px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--red);
+}
+
+.svc__related ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.svc__related a {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.6rem;
+  border: 1px solid var(--border);
+  background: var(--bg2);
+  padding: 0.65rem 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 8px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  transition: border-color 0.2s var(--ease), background 0.2s var(--ease), color 0.2s var(--ease);
+}
+
+.svc__related a:hover {
+  border-color: rgba(220, 38, 38, 0.35);
+  background: rgba(220, 38, 38, 0.04);
+  color: var(--text);
+}
+
+.svc__related-arrow {
+  color: var(--red);
+}
+
+.svc__help {
+  border: 1px solid var(--border);
+  clip-path: var(--clip-cut);
+  padding: 1.25rem;
+  background: var(--bg2);
+}
+
+.svc__help h3 {
+  margin-bottom: 0.65rem;
+  font-family: var(--font-head);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text);
+}
+
+.svc__help p {
+  margin-bottom: 0.9rem;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: var(--text-muted);
+}
+
+.svc__help a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 40px;
+  clip-path: var(--clip-cut);
+  background: var(--red);
+  font-family: var(--font-head);
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.svc__help a:hover {
+  background: var(--red-dark);
+}
+
+@media (max-width: 768px) {
+  .svc__breadcrumb {
+    padding: 0.75rem 1rem;
+  }
+
+  .svc__hero-inner,
+  .svc__body-inner {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+/* ── Extended info section ──────────────────────── */
+.svc__extended {
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.svc__ext-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 3rem 2.5rem 4rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem 3rem;
+}
+
+.svc__ext-block h2,
+.svc__ext-faq h2 {
+  margin-bottom: 0.9rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid rgba(220, 38, 38, 0.2);
+  font-family: var(--font-head);
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--red);
+}
+
+.svc__ext-block p {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  line-height: 1.75;
+  color: var(--text-muted);
+  margin-bottom: 0.75rem;
+}
+
+.svc__ext-faq {
+  grid-column: 1 / -1;
+}
+
+.svc__faq-item {
+  border-bottom: 1px solid var(--border);
+}
+
+.svc__faq-item:first-of-type {
+  border-top: 1px solid var(--border);
+}
+
+.svc__faq-q {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.9rem 0.25rem;
+  font-family: var(--font-head);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text);
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+}
+
+.svc__faq-q::-webkit-details-marker {
+  display: none;
+}
+
+.svc__faq-q::after {
+  content: '+';
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--red);
+  flex-shrink: 0;
+  margin-left: 1rem;
+}
+
+details[open] > .svc__faq-q {
+  border-left: 3px solid var(--red);
+  padding-left: calc(0.25rem + 0.5rem);
+}
+
+details[open] > .svc__faq-q::after {
+  content: '−';
+}
+
+.svc__faq-a {
+  padding: 0 0.25rem 1rem 0.75rem;
+  font-family: var(--font-body);
+  font-size: 0.925rem;
+  line-height: 1.75;
+  color: var(--text-muted);
+}
+
+@media (max-width: 768px) {
+  .svc__ext-inner {
+    grid-template-columns: 1fr;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-bottom: 2.5rem;
+  }
+
+  .svc__ext-faq {
+    grid-column: 1;
+  }
+}
+</style>

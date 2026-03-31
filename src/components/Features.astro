@@ -1,0 +1,540 @@
+---
+const bookingBase = 'https://wa.me/447575701219?text=';
+
+const features = [
+  {
+    id: 'laptop-repairs',
+    index: '01',
+    tag: 'Most popular',
+    title: 'Laptop Repairs',
+    lead: 'Screen replacements, keyboard fixes, charging ports, motherboard diagnosis.',
+    body: 'Most laptops are fixable - even ones other shops have given up on. I diagnose first, give you a clear quote, and only charge if the repair succeeds. Same day whenever possible.',
+    time: 'Same day',
+    img: 'https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=800&q=80',
+    imgAlt: 'Laptop being repaired - Hardwire Core',
+    reverse: false,
+  },
+  {
+    id: 'desktop-repairs',
+    index: '02',
+    tag: null,
+    title: 'Desktop PC Repairs',
+    lead: 'Power supply failures, GPU issues, no POST diagnostics.',
+    body: 'Desktop PCs are my speciality. From custom builds to office machines - I fix what others give up on. Full component-level diagnosis included.',
+    time: '1-2 days',
+    img: 'https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?w=800&q=80',
+    imgAlt: 'Desktop PC repair - Hardwire Core',
+    reverse: true,
+  },
+  {
+    id: 'data-recovery',
+    index: '03',
+    tag: 'High success rate',
+    title: 'Data Recovery',
+    lead: 'Failed drives, accidental deletes, corrupted partitions.',
+    body: 'Photos, documents, work files - recovered from drives that appear completely dead. I assess the failure type first and tell you honestly what is possible before charging anything.',
+    time: '2-3 days',
+    img: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80',
+    imgAlt: 'Data recovery hard drive - Hardwire Core',
+    reverse: false,
+  },
+  {
+    id: 'virus-removal',
+    index: '04',
+    tag: null,
+    title: 'Virus & Malware Removal',
+    lead: 'Deep scan, full clean, browser reset.',
+    body: 'Ransomware, spyware, adware - completely removed. Your machine returned to a clean, fast, safe state. No data lost in the process.',
+    time: 'Same day',
+    img: 'https://images.unsplash.com/photo-1563206767-5b18f218e8de?w=800&q=80',
+    imgAlt: 'Virus removal cybersecurity - Hardwire Core',
+    reverse: true,
+  },
+];
+---
+
+<section class="features" aria-label="Hardwire Core features" id="features">
+  <div class="features__topline" aria-hidden="true"></div>
+
+  {features.map((feature) => {
+    const href = `${bookingBase}${encodeURIComponent(`Hi, I'd like to book ${feature.title}.`)}`;
+
+    return (
+      <article
+        class={`features__item ${feature.reverse ? 'is-reverse' : ''}`}
+        data-feature-item
+        id={feature.id}
+      >
+        <div class="features__img-col" data-feature-img>
+          <img
+            src={feature.img}
+            alt={feature.imgAlt}
+            loading="lazy"
+            decoding="async"
+          />
+          <span class="features__bracket features__bracket--tl" aria-hidden="true"></span>
+          <span class="features__bracket features__bracket--tr" aria-hidden="true"></span>
+          <span class="features__bracket features__bracket--bl" aria-hidden="true"></span>
+          <span class="features__bracket features__bracket--br" aria-hidden="true"></span>
+          <span class="features__watermark" aria-hidden="true">{feature.index}</span>
+        </div>
+
+        <div class="features__text-col" data-feature-text>
+          <div class="features__eyebrow-row">
+            <span class="features__index">// {feature.index}</span>
+            {feature.tag && <span class="features__tag">{feature.tag}</span>}
+          </div>
+
+          <h3>{feature.title}</h3>
+          <p class="features__lead">{feature.lead}</p>
+          <p class="features__body">{feature.body}</p>
+
+          <div class="features__meta">
+            <span class="features__time">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"></circle>
+                <path d="M12 7.4V12L15.4 13.9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+              Turnaround: {feature.time}
+            </span>
+          </div>
+
+          <a href={href} class="features__cta" target="_blank" rel="noreferrer">
+            <span>Book this service</span>
+            <svg viewBox="0 0 12 12" fill="none" aria-hidden="true">
+              <path d="M1 11L11 1M11 1H3M11 1V9" stroke="currentColor" stroke-width="1.5"></path>
+            </svg>
+          </a>
+        </div>
+      </article>
+    );
+  })}
+
+  <div class="features__bottomline" aria-hidden="true"></div>
+</section>
+
+<style>
+.features {
+  position: relative;
+  background: var(--bg);
+  overflow: hidden;
+}
+
+.features::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.12) 2px,
+    rgba(0, 0, 0, 0.12) 4px
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+.features > * {
+  position: relative;
+  z-index: 1;
+}
+
+.features__topline {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(220, 38, 38, 0.5), transparent);
+}
+
+.features__bottomline {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+}
+
+.features__item {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 0;
+  min-height: 480px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg);
+}
+
+.features__img-col {
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+  min-height: 480px;
+}
+
+.features__img-col::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, var(--bg) 0%, transparent 40%);
+  z-index: 1;
+}
+
+.features__item.is-reverse .features__img-col {
+  order: 2;
+}
+
+.features__item.is-reverse .features__text-col {
+  order: 1;
+  padding: 3.5rem 3rem 3.5rem 4rem;
+}
+
+.features__item.is-reverse .features__img-col::after {
+  background: linear-gradient(to left, var(--bg) 0%, transparent 40%);
+}
+
+.features__img-col img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.82;
+  display: block;
+}
+
+#data-recovery .features__img-col img {
+  filter: brightness(0.72);
+}
+
+.features__bracket {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-color: rgba(220, 38, 38, 0.45);
+  border-style: solid;
+  border-width: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.features__bracket--tl {
+  top: 16px;
+  left: 16px;
+  border-top-width: 2px;
+  border-left-width: 2px;
+}
+
+.features__bracket--tr {
+  top: 16px;
+  right: 16px;
+  border-top-width: 2px;
+  border-right-width: 2px;
+}
+
+.features__bracket--bl {
+  bottom: 16px;
+  left: 16px;
+  border-bottom-width: 2px;
+  border-left-width: 2px;
+}
+
+.features__bracket--br {
+  bottom: 16px;
+  right: 16px;
+  border-bottom-width: 2px;
+  border-right-width: 2px;
+}
+
+.features__watermark {
+  position: absolute;
+  bottom: 16px;
+  left: 18px;
+  font-family: var(--font-mono);
+  font-size: clamp(5rem, 10vw, 9rem);
+  line-height: 1;
+  color: #fff;
+  opacity: 0.04;
+  z-index: 2;
+  user-select: none;
+  pointer-events: none;
+}
+
+.features__text-col {
+  padding: 3.5rem 3rem 3.5rem;
+  background: transparent;
+}
+
+.features__eyebrow-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 1rem;
+}
+
+.features__index {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(220, 38, 38, 0.6);
+}
+
+.features__tag {
+  display: inline-flex;
+  align-items: center;
+  height: 18px;
+  padding: 3px 10px;
+  clip-path: var(--clip-cut);
+  border: 1px solid rgba(220, 38, 38, 0.35);
+  font-family: var(--font-mono);
+  font-size: 8px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--red);
+}
+
+.features__text-col h3 {
+  font-family: var(--font-head);
+  font-size: clamp(1.6rem, 2.8vw, 2.4rem);
+  line-height: 1.15;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text);
+  margin-bottom: 0.75rem;
+}
+
+.features__lead {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--text-mid);
+  font-weight: 600;
+  line-height: 1.5;
+  margin-bottom: 0.75rem;
+}
+
+.features__body {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.75;
+  margin-bottom: 1.5rem;
+  max-width: 60ch;
+}
+
+.features__meta {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.75rem;
+}
+
+.features__time {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.features__time svg {
+  width: 12px;
+  height: 12px;
+  color: var(--red);
+  flex-shrink: 0;
+}
+
+.features__cta {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  height: 42px;
+  padding: 0 1.5rem;
+  clip-path: var(--clip-cut);
+  border: 1px solid var(--red-dark);
+  background: var(--red);
+  color: #fff;
+  font-family: var(--font-head);
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  overflow: hidden;
+  transition: background 0.2s var(--ease), border-color 0.2s var(--ease);
+}
+
+.features__cta::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -110%;
+  width: 70%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.45s var(--ease);
+}
+
+.features__cta:hover {
+  background: var(--red-dark);
+  border-color: var(--red);
+}
+
+.features__cta:hover::before {
+  left: 130%;
+}
+
+.features__cta svg {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+}
+
+.features__item[data-reveal-ready='true'] .features__img-col,
+.features__item[data-reveal-ready='true'] .features__text-col {
+  opacity: 0;
+}
+
+.features__item[data-reveal-ready='true'] .features__img-col {
+  transform: translateX(-30px);
+}
+
+.features__item.is-reverse[data-reveal-ready='true'] .features__img-col {
+  transform: translateX(30px);
+}
+
+.features__item[data-reveal-ready='true'] .features__text-col {
+  transform: translateX(30px);
+}
+
+.features__item.is-reverse[data-reveal-ready='true'] .features__text-col {
+  transform: translateX(-30px);
+}
+
+.features__item.is-visible .features__img-col,
+.features__item.is-visible .features__text-col {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.features__item.is-reverse.is-visible .features__img-col,
+.features__item.is-reverse.is-visible .features__text-col {
+  transform: translateX(0);
+}
+
+.features__item[data-reveal-ready='true'] .features__img-col {
+  transition: opacity 0.65s var(--ease), transform 0.65s var(--ease);
+}
+
+.features__item[data-reveal-ready='true'] .features__text-col {
+  transition: opacity 0.65s var(--ease) 100ms, transform 0.65s var(--ease) 100ms;
+}
+
+@media (max-width: 1024px) {
+  .features__item,
+  .features__item.is-reverse {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+
+  .features__item .features__img-col,
+  .features__item.is-reverse .features__img-col {
+    order: 1;
+    height: 280px;
+    min-height: 0;
+  }
+
+  .features__item .features__text-col,
+  .features__item.is-reverse .features__text-col {
+    order: 2;
+    padding: 2rem 1.5rem;
+  }
+
+  .features__item .features__img-col::after,
+  .features__item.is-reverse .features__img-col::after {
+    background: linear-gradient(to top, var(--bg) 0%, transparent 45%);
+  }
+
+  .features__watermark {
+    font-size: clamp(4rem, 12vw, 6.5rem);
+  }
+}
+
+@media (max-width: 768px) {
+  .features__img-col,
+  .features__item.is-reverse .features__img-col {
+    height: 220px;
+  }
+
+  .features__text-col h3 {
+    font-size: clamp(1.4rem, 6vw, 1.8rem);
+  }
+
+  .features__cta {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .features__item[data-reveal-ready='true'] .features__img-col,
+  .features__item[data-reveal-ready='true'] .features__text-col {
+    transform: none;
+    transition: opacity 0.2s linear;
+  }
+}
+</style>
+
+<script>
+  const FEATURE_SELECTOR = '[data-feature-item]';
+  const VISIBLE_CLASS = 'is-visible';
+
+  const initFeaturesReveal = () => {
+    const items = Array.from(document.querySelectorAll<HTMLElement>(FEATURE_SELECTOR));
+    if (!items.length) return;
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const isMobile = window.matchMedia('(max-width: 992px)').matches;
+
+    items.forEach((item) => {
+      item.classList.remove(VISIBLE_CLASS);
+      item.removeAttribute('data-reveal-ready');
+    });
+
+    if (reduceMotion || isMobile) {
+      items.forEach((item) => item.classList.add(VISIBLE_CLASS));
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const target = entry.target as HTMLElement;
+          if (!entry.isIntersecting) return;
+          target.classList.add(VISIBLE_CLASS);
+          observer.unobserve(target);
+        });
+      },
+      {
+        threshold: 0.25,
+        rootMargin: '0px 0px -10% 0px',
+      }
+    );
+
+    items.forEach((item) => {
+      item.setAttribute('data-reveal-ready', 'true');
+      observer.observe(item);
+    });
+  };
+
+  const runFeaturesReveal = () => {
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => initFeaturesReveal());
+    });
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', runFeaturesReveal, { once: true });
+  } else {
+    runFeaturesReveal();
+  }
+
+  document.addEventListener('astro:page-load', runFeaturesReveal);
+  document.addEventListener('astro:after-swap', runFeaturesReveal);
+</script>

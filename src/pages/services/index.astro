@@ -1,0 +1,296 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import SiteMenu from '../../components/SiteMenu.astro';
+import Footer from '../../components/Footer.astro';
+import { serviceCategories } from '../../data/services';
+---
+
+<Layout
+  title="Services | Hardwire Core"
+  description="Computer repair services in Stanwell TW19, Surrey. Free diagnosis, no fix no fee."
+>
+  <SiteMenu />
+
+  <main>
+    <section class="svc-index__hero" aria-label="Services hero">
+      <div class="svc-index__hero-topline" aria-hidden="true"></div>
+      <div class="svc-index__hero-inner">
+        <span class="svc-index__eyebrow">// All services</span>
+        <h1>What I Fix</h1>
+        <p>Every repair starts with a free diagnosis. No fix, no fee.</p>
+      </div>
+    </section>
+
+    <section class="svc-index__main" aria-label="Services listing">
+      <div class="svc-index__inner">
+        <div class="svc-index__categories">
+          {serviceCategories.map((category) => (
+            <section id={`cat-${category.id}`} class="svc-index__cat">
+              <h2>{category.title}</h2>
+              <div class="svc-index__grid">
+                {category.items.map((item) => (
+                  <a href={`/services/${item.slug}/`} class="svc-index__item" aria-label={`View ${item.title}`}>
+                    <div class="svc-index__item-left">
+                      <span class="svc-index__item-title">{item.title}</span>
+                      <span class="svc-index__item-time">{item.time}</span>
+                    </div>
+                    <div class="svc-index__item-right">
+                      <span class="svc-index__item-price">{item.price}</span>
+                      {item.tag && <span class="svc-index__item-tag">{item.tag}</span>}
+                    </div>
+                    <span class="svc-index__arrow" aria-hidden="true">-&gt;</span>
+                  </a>
+                ))}
+              </div>
+            </section>
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+.svc-index__hero {
+  position: relative;
+  background: var(--bg);
+  overflow: hidden;
+}
+
+.svc-index__hero::before,
+.svc-index__main::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 0, 0, 0.12) 2px, rgba(0, 0, 0, 0.12) 4px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.svc-index__hero > *,
+.svc-index__main > * {
+  position: relative;
+  z-index: 1;
+}
+
+.svc-index__hero-topline {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(220, 38, 38, 0.5), transparent);
+}
+
+.svc-index__hero-inner {
+  max-width: 1400px;
+  min-height: 280px;
+  margin: 0 auto;
+  padding: 3.5rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+.svc-index__eyebrow {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 1rem;
+}
+
+.svc-index__hero h1 {
+  font-family: var(--font-head);
+  font-size: clamp(1.9rem, 4vw, 3rem);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text);
+  margin-bottom: 0.7rem;
+}
+
+.svc-index__hero p {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--text-mid);
+}
+
+.svc-index__main {
+  position: relative;
+  background: var(--bg);
+  overflow: hidden;
+}
+
+.svc-index__inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 4rem 2.5rem 6rem;
+  display: block;
+}
+
+.svc-index__categories {
+  display: flex;
+  flex-direction: column;
+  gap: 2.75rem;
+}
+
+.svc-index__cat h2 {
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid var(--border);
+  font-family: var(--font-head);
+  font-size: 14px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.svc-index__cat {
+  border-left: 2px solid transparent;
+  padding: 0.25rem 0 0.25rem 1rem;
+  transition: border-color 0.2s var(--ease), background 0.2s var(--ease);
+}
+
+.svc-index__cat.is-active {
+  border-left-color: var(--red);
+  background: rgba(220, 38, 38, 0.03);
+}
+
+.svc-index__cat.is-active h2 {
+  color: var(--text);
+  border-bottom-color: rgba(220, 38, 38, 0.3);
+}
+
+.svc-index__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+  gap: 0.7rem;
+}
+
+.svc-index__item {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: start;
+  gap: 0.75rem;
+  padding: 1rem 1.05rem 1.15rem;
+  border: 1px solid var(--border);
+  background: var(--bg2);
+  transition: border-color 0.2s var(--ease), background 0.2s var(--ease);
+}
+
+.svc-index__item:hover {
+  border-color: rgba(220, 38, 38, 0.35);
+  background: rgba(220, 38, 38, 0.04);
+}
+
+.svc-index__item-left {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.svc-index__item-title {
+  font-family: var(--font-head);
+  font-size: 11px;
+  letter-spacing: 0.09em;
+  line-height: 1.45;
+  text-transform: uppercase;
+  color: var(--text);
+}
+
+.svc-index__item-time {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.svc-index__item-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.3rem;
+}
+
+.svc-index__item-price {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--red);
+}
+
+.svc-index__item-tag {
+  display: inline-flex;
+  align-items: center;
+  height: 18px;
+  padding: 2px 6px;
+  border: 1px solid rgba(220, 38, 38, 0.3);
+  clip-path: var(--clip-cut);
+  font-family: var(--font-mono);
+  font-size: 7px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--red);
+}
+
+.svc-index__arrow {
+  position: absolute;
+  right: 0.9rem;
+  bottom: 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--red);
+  opacity: 0;
+  transition: opacity 0.2s var(--ease), transform 0.2s var(--ease);
+  transform: translateX(-3px);
+}
+
+.svc-index__item:hover .svc-index__arrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+@media (max-width: 768px) {
+  .svc-index__cat {
+    padding-left: 0.65rem;
+  }
+
+  .svc-index__categories {
+    gap: 2.2rem;
+  }
+
+  .svc-index__cat h2 {
+    font-size: 13px;
+  }
+
+  .svc-index__grid {
+    grid-template-columns: 1fr;
+    gap: 0.55rem;
+  }
+
+  .svc-index__item {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+    padding: 0.9rem 0.95rem 1.05rem;
+  }
+
+  .svc-index__item-right {
+    align-items: flex-start;
+  }
+
+  .svc-index__arrow {
+    right: 0.75rem;
+    bottom: 0.65rem;
+  }
+
+  .svc-index__hero-inner,
+  .svc-index__inner {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+</style>
