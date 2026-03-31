@@ -666,8 +666,6 @@ body.menu-open #wa-widget {
   body.menu-open {
     overflow: hidden;
     touch-action: none;
-    position: fixed;
-    width: 100%;
   }
 
   body.menu-open .navbar__menu {
