@@ -319,8 +319,10 @@ const steps = [
   .hiw__photo {
     display: block;
     position: sticky;
-    top: calc(var(--nav-h, 64px) + var(--topbar-h, 36px) + 2rem);
-    aspect-ratio: 3 / 4;
+    top: calc(var(--nav-h, 64px) + var(--topbar-h, 36px) + 1rem);
+    align-self: start;
+    height: fit-content;
+    max-height: calc(100vh - var(--nav-h, 64px) - var(--topbar-h, 36px) - 3rem);
     overflow: hidden;
     clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px));
     border: none;
