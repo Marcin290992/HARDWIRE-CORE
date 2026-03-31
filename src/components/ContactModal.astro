@@ -6,7 +6,7 @@
     <div class="contact-modal__redline"></div>
     <button
       class="contact-modal__close"
-      onclick="document.getElementById('contactModal').classList.remove('is-open')"
+      onclick="closeContactModal()"
       aria-label="Close modal"
     >×</button>
 
@@ -56,8 +56,11 @@
     position: fixed;
     inset: 0;
     z-index: 9999;
-    background: rgba(0, 0, 0, 0.75);
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     padding: 1rem;
+    overflow: hidden;
   }
   .contact-modal.is-open {
     display: flex;
@@ -65,12 +68,17 @@
     justify-content: center;
   }
   .contact-modal__box {
-    background: var(--bg);
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 30%, rgba(220,38,38,0.08) 0%, transparent 70%),
+      var(--bg);
     border: 1px solid var(--red-border);
     max-width: 480px;
     width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
     clip-path: var(--clip-cut);
     position: relative;
+    box-shadow: 0 0 60px rgba(220,38,38,0.1), 0 0 120px rgba(220,38,38,0.05);
   }
   .contact-modal__redline {
     height: 2px;
@@ -102,6 +110,7 @@
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--red);
+    text-shadow: 0 0 16px rgba(220,38,38,0.35);
     margin: 0 0 0.5rem;
   }
   .contact-modal__eyebrow--sm {
@@ -215,16 +224,27 @@
 </style>
 
 <script is:inline>
+  function openContactModal() {
+    var modal = document.getElementById('contactModal');
+    if (modal) {
+      modal.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+    }
+  }
+  function closeContactModal() {
+    var modal = document.getElementById('contactModal');
+    if (modal) {
+      modal.classList.remove('is-open');
+      document.body.style.overflow = '';
+    }
+  }
   document.addEventListener('click', function(e) {
     var modal = document.getElementById('contactModal');
-    if (modal && e.target === modal) modal.classList.remove('is-open');
+    if (modal && e.target === modal) closeContactModal();
   });
   document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') document.getElementById('contactModal')?.classList.remove('is-open');
+    if (e.key === 'Escape') closeContactModal();
   });
-  function openContactModal() {
-    document.getElementById('contactModal').classList.add('is-open');
-  }
   function sendContactWhatsapp() {
     var msg = document.getElementById('contactMsg').value;
     window.open('https://wa.me/447575701219?text=' + encodeURIComponent(msg), '_blank');

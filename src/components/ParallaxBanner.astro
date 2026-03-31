@@ -57,7 +57,9 @@ const whatsappUrl = 'https://wa.me/447575701219';
   overflow: hidden;
   height: 80vh;
   min-height: 520px;
-  background: var(--bg);
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 50%, rgba(220,38,38,0.09) 0%, transparent 65%),
+    var(--bg);
 }
 
 .prlx__line {
@@ -173,6 +175,7 @@ const whatsappUrl = 'https://wa.me/447575701219';
   letter-spacing: 0.3em;
   text-transform: uppercase;
   color: var(--red);
+  text-shadow: 0 0 20px rgba(220,38,38,0.35);
 }
 
 .prlx__title {
@@ -188,6 +191,7 @@ const whatsappUrl = 'https://wa.me/447575701219';
 .prlx__title em {
   font-style: normal;
   color: var(--red);
+  text-shadow: 0 0 40px rgba(220,38,38,0.3), 0 0 80px rgba(220,38,38,0.12);
 }
 
 .prlx__sub {
@@ -230,6 +234,7 @@ const whatsappUrl = 'https://wa.me/447575701219';
 
 .prlx__btn--primary:hover {
   background: var(--red-dark);
+  box-shadow: 0 0 30px rgba(220,38,38,0.25);
 }
 
 .prlx__btn-shine {
@@ -252,6 +257,7 @@ const whatsappUrl = 'https://wa.me/447575701219';
 
 .prlx__btn--secondary:hover {
   border-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 20px rgba(255,255,255,0.04);
 }
 
 @media (max-width: 768px) {

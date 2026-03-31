@@ -188,7 +188,9 @@ const explainChecklist =
 /* ── Hero with image ──────────────────────── */
 .svc__hero {
   position: relative;
-  background: var(--bg);
+  background:
+    radial-gradient(ellipse 90% 70% at 50% 40%, rgba(220,38,38,0.08) 0%, transparent 70%),
+    var(--bg);
   overflow: hidden;
   min-height: 340px;
 }
@@ -257,6 +259,7 @@ const explainChecklist =
   letter-spacing: 0.3em;
   text-transform: uppercase;
   color: var(--red);
+  text-shadow: 0 0 20px rgba(220,38,38,0.35);
 }
 
 .svc__hero h1 {
@@ -345,7 +348,23 @@ const explainChecklist =
 
 /* ── Body ──────────────────────── */
 .svc__body {
-  background: var(--bg);
+  background:
+    radial-gradient(ellipse 70% 50% at 50% 30%, rgba(220,38,38,0.05) 0%, transparent 70%),
+    var(--bg);
+  position: relative;
+}
+
+.svc__body::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.025;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px);
+  background-size: 60px 60px;
 }
 
 .svc__body-inner {

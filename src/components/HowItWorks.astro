@@ -93,8 +93,24 @@ const steps = [
 /* ── Section shell ──────────────────────────────────────── */
 .hiw {
   position: relative;
-  background: var(--bg);
+  background:
+    radial-gradient(ellipse 70% 50% at 20% 40%, rgba(220,38,38,0.08) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 40% at 80% 60%, rgba(220,38,38,0.04) 0%, transparent 60%),
+    var(--bg);
   overflow: hidden;
+}
+
+.hiw::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.025;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px);
+  background-size: 60px 60px;
 }
 
 .hiw::before {
@@ -270,6 +286,7 @@ const steps = [
 .hiw__step.is-active .hiw__num::before {
   background: rgba(220, 38, 38, 0.12);
   border-color: rgba(220, 38, 38, 0.5);
+  box-shadow: 0 0 20px rgba(220,38,38,0.15);
 }
 
 .hiw__num-label {
@@ -284,7 +301,19 @@ const steps = [
 
 /* ── Step content ───────────────────────────────────────── */
 .hiw__content {
-  padding-top: 0.7rem;
+  padding: 0.7rem 1rem 0.7rem 1.2rem;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.01);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  transition: border-color 0.4s, background 0.4s, box-shadow 0.4s;
+}
+
+.hiw__step.is-active .hiw__content {
+  border-color: rgba(220,38,38,0.15);
+  background: rgba(220,38,38,0.03);
+  box-shadow: 0 0 24px rgba(220,38,38,0.06);
 }
 
 .hiw__step-title {
@@ -311,6 +340,7 @@ const steps = [
 
 .hiw__step.is-active .hiw__step-desc {
   color: rgba(240, 240, 240, 0.75);
+  text-shadow: 0 0 20px rgba(255,255,255,0.03);
 }
 
 /* ── Photo ──────────────────────────────────────────────── */
@@ -369,7 +399,38 @@ const steps = [
 .hiw__corner--tl,
 .hiw__corner--tr,
 .hiw__corner--bl,
-.hiw__corner--br { display: none; }
+.hiw__corner--br {
+  border-color: rgba(220,38,38,0.35);
+  border-style: solid;
+  border-width: 0;
+}
+
+@media (min-width: 1024px) {
+  .hiw__corner--tl {
+    display: block;
+    top: 0; left: 0;
+    border-top-width: 2px;
+    border-left-width: 2px;
+  }
+  .hiw__corner--tr {
+    display: block;
+    top: 0; right: 0;
+    border-top-width: 2px;
+    border-right-width: 2px;
+  }
+  .hiw__corner--bl {
+    display: block;
+    bottom: 0; left: 0;
+    border-bottom-width: 2px;
+    border-left-width: 2px;
+  }
+  .hiw__corner--br {
+    display: block;
+    bottom: 0; right: 0;
+    border-bottom-width: 2px;
+    border-right-width: 2px;
+  }
+}
 
 /* ── CTA strip ──────────────────────────────────────────── */
 .hiw__cta {
@@ -381,6 +442,18 @@ const steps = [
   gap: 1rem;
   border-top: 1px solid var(--border);
   padding-top: 2rem;
+  background: rgba(255,255,255,0.01);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border-radius: 8px;
+  padding: 2rem 1.5rem;
+  border: 1px solid var(--border);
+  transition: border-color 0.35s, box-shadow 0.35s;
+}
+
+.hiw__cta:hover {
+  border-color: rgba(220,38,38,0.15);
+  box-shadow: 0 0 30px rgba(220,38,38,0.05);
 }
 
 .hiw__cta-text {

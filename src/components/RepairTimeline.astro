@@ -62,8 +62,24 @@ const icons = {
 <style>
 .rtl {
   position: relative;
-  background: var(--bg);
+  background:
+    radial-gradient(ellipse 80% 50% at 50% 50%, rgba(220,38,38,0.08) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 40% at 20% 80%, rgba(220,38,38,0.04) 0%, transparent 60%),
+    var(--bg);
   overflow: hidden;
+}
+
+.rtl::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.025;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px);
+  background-size: 60px 60px;
 }
 
 .rtl::before {
@@ -211,6 +227,11 @@ const icons = {
   color: var(--text);
   line-height: 1;
   text-shadow: 0 0 20px rgba(255, 255, 255, 0.06);
+  transition: text-shadow 0.3s;
+}
+
+.rtl__node:hover .rtl__time-num {
+  text-shadow: 0 0 24px rgba(220,38,38,0.25);
 }
 
 .rtl__time-unit {

@@ -116,8 +116,24 @@ const features = [
 <style>
 .features {
   position: relative;
-  background: var(--bg);
+  background:
+    radial-gradient(ellipse 70% 50% at 30% 30%, rgba(220,38,38,0.08) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 40% at 80% 70%, rgba(220,38,38,0.04) 0%, transparent 60%),
+    var(--bg);
   overflow: hidden;
+}
+
+.features::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.025;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px);
+  background-size: 60px 60px;
 }
 
 .features::before {
@@ -158,6 +174,12 @@ const features = [
   min-height: 480px;
   border-bottom: 1px solid var(--border);
   background: var(--bg);
+  transition: border-bottom-color 0.4s, box-shadow 0.4s;
+}
+
+.features__item:hover {
+  border-bottom-color: rgba(220,38,38,0.2);
+  box-shadow: inset 0 0 60px rgba(220,38,38,0.03);
 }
 
 .features__img-col {
@@ -255,7 +277,18 @@ const features = [
 
 .features__text-col {
   padding: 3.5rem 3rem 3.5rem;
-  background: transparent;
+  background: rgba(255,255,255,0.01);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  position: relative;
+}
+
+.features__text-col::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 100% 80% at 50% 50%, rgba(220,38,38,0.04) 0%, transparent 70%);
+  pointer-events: none;
 }
 
 .features__eyebrow-row {

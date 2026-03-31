@@ -63,8 +63,24 @@ import { serviceCategories } from '../../data/services';
 .page-subpage { background: var(--bg); }
 .svc-index__hero {
   position: relative;
-  background: var(--bg);
+  background:
+    radial-gradient(ellipse 90% 70% at 50% 35%, rgba(220,38,38,0.08) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 40% at 80% 80%, rgba(220,38,38,0.04) 0%, transparent 60%),
+    var(--bg);
   overflow: hidden;
+}
+
+.svc-index__hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.03;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px);
+  background-size: 60px 60px;
 }
 
 .svc-index__hero::before,
@@ -138,8 +154,23 @@ import { serviceCategories } from '../../data/services';
 
 .svc-index__main {
   position: relative;
-  background: var(--bg);
+  background:
+    radial-gradient(ellipse 70% 50% at 50% 50%, rgba(220,38,38,0.06) 0%, transparent 70%),
+    var(--bg);
   overflow: hidden;
+}
+
+.svc-index__main::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.025;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px);
+  background-size: 60px 60px;
 }
 
 .svc-index__inner {
