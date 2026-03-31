@@ -333,7 +333,24 @@ const isHomePage = Astro.url.pathname === '/';
         });
       }
 
-      document.addEventListener('astro:before-preparation', animOut);
+      document.addEventListener('astro:before-preparation', function (ev) {
+        animOut(ev);
+        // Run page fetch in parallel with animation, but only proceed
+        // to swap when BOTH are done — eliminates the "dead pause" on
+        // slower networks (Netlify CDN vs localhost).
+        var origLoader = ev.loader;
+        ev.loader = function () {
+          return Promise.all([
+            origLoader(),
+            new Promise(function (resolve) {
+              (function waitAnim() {
+                if (outDone) return resolve();
+                requestAnimationFrame(waitAnim);
+              })();
+            })
+          ]);
+        };
+      });
 
       document.addEventListener('astro:after-swap', function () {
         captureRefs();
