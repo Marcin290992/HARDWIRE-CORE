@@ -658,10 +658,16 @@ body.menu-open {
   overscroll-behavior: none;
 }
 
+body.menu-open #wa-widget {
+  display: none !important;
+}
+
 @media (max-width: 992px) {
   body.menu-open {
-    overflow: visible;
+    overflow: hidden;
     touch-action: none;
+    position: fixed;
+    width: 100%;
   }
 
   body.menu-open .navbar__menu {
