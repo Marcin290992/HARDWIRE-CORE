@@ -323,7 +323,7 @@ const steps = [
     aspect-ratio: 3 / 4;
     overflow: hidden;
     clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px));
-    border: 1px solid rgba(220, 38, 38, 0.2);
+    border: none;
     background: var(--bg);
   }
 }
@@ -349,15 +349,7 @@ const steps = [
 }
 
 .hiw__photo-label {
-  position: absolute;
-  bottom: 1rem;
-  left: 1rem;
-  font-family: var(--font-mono);
-  font-size: 8px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: rgba(220, 38, 38, 0.6);
-  pointer-events: none;
+  display: none;
 }
 
 /* bracket corners */
@@ -369,10 +361,10 @@ const steps = [
   z-index: 2;
 }
 
-.hiw__corner--tl { top: 0; left: 0;   border-top:  2px solid rgba(220,38,38,0.45); border-left: 2px solid rgba(220,38,38,0.45); }
-.hiw__corner--tr { top: 0; right: 0;  border-top:  2px solid rgba(220,38,38,0.45); border-right:2px solid rgba(220,38,38,0.45); }
-.hiw__corner--bl { bottom: 0; left: 0;  border-bottom: 2px solid rgba(220,38,38,0.45); border-left:  2px solid rgba(220,38,38,0.45); }
-.hiw__corner--br { bottom: 0; right: 0; border-bottom: 2px solid rgba(220,38,38,0.45); border-right: 2px solid rgba(220,38,38,0.45); }
+.hiw__corner--tl,
+.hiw__corner--tr,
+.hiw__corner--bl,
+.hiw__corner--br { display: none; }
 
 /* ── CTA strip ──────────────────────────────────────────── */
 .hiw__cta {
