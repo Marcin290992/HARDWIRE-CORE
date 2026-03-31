@@ -1420,13 +1420,15 @@ body.menu-open #wa-widget {
     height: auto;
     flex-direction: row;
     justify-content: flex-start;
-    padding: 16px 20px;
-    gap: 14px;
-    font-size: 12px;
+    padding: 18px 24px;
+    gap: 16px;
+    font-size: 14px;
     letter-spacing: 0.12em;
     border-left: none;
     border-right: none;
     color: var(--text-mid);
+    transition: background 0.2s var(--ease), color 0.2s var(--ease), border-color 0.2s var(--ease);
+    border-left: 3px solid transparent;
   }
 
   .navbar__link::after {
@@ -1434,8 +1436,9 @@ body.menu-open #wa-widget {
   }
 
   .navbar__link svg {
-    width: 18px;
-    height: 18px;
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
   }
 
   .navbar__link span {
@@ -1445,8 +1448,9 @@ body.menu-open #wa-widget {
 
   .navbar__link:hover,
   .navbar__item.active > .navbar__link {
-    background: rgba(220, 38, 38, 0.06);
-    color: var(--text);
+    background: rgba(220, 38, 38, 0.08);
+    color: #fff;
+    border-left-color: var(--red);
   }
 
   .navbar__link--book {
